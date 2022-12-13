@@ -38,7 +38,7 @@ std::string OperationHoursMeter::to_string() const {
 
 int main() {
     OperationHoursMeter test{};
-    for (int i = 0; i < 2222222; ++i) {
+    for (int i = 0; i < 2'222'222; ++i) {
         test.incr();
         std::cout << '\r' << test.to_string() << std::flush;
     }
