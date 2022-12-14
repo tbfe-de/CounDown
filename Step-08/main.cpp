@@ -40,27 +40,26 @@ i* Solution FlexCounter -- DOCUMENTATION NEEDS UPDATE
 #include <climits>
 #include <functional>
 
-template<typename T, T N>
+template<unsigned N>
 class FlexCounter {
 public:
-    using value_type = T;
-    static const value_type MAX = N;
+    static const unsigned MAX = N;
     FlexCounter(std::function<bool()> next)
         : next_{next}
     {}
-    value_type get_value() const { return value_; }
+    unsigned get_value() const { return value_; }
     bool incr();
 private:
-    value_type value_ = 0;
+    unsigned value_ = 0;
     std::function<bool()> next_;
 };
 
-template<typename T, T N>
-bool FlexCounter<T, N>::incr() {
+template<unsigned N>
+bool FlexCounter<N>::incr() {
     if (++value_ < MAX)
         return true;
     if (next_ && next_()) {
-        value_ = value_type{};
+        value_ = 0;
         return true;
     }
     return false;
@@ -72,14 +71,11 @@ bool FlexCounter<T, N>::incr() {
 #include <iostream>
 
 void test_counter_chain(int n) {
-    FlexCounter<int, 3> upper{[]{ return true; }};
-    FlexCounter<int, 8> lower{[&upper]{ return upper.incr(); }};
+    FlexCounter<3> upper{[]{ return true; }};
+    FlexCounter<8> lower{[&upper]{ return upper.incr(); }};
     for (int i = 0; i < n; ++i) {
-        auto const lower_at_limit =
-            (lower.get_value()+1 == decltype(lower)::MAX);
-        auto const space_or_nl = (not lower_at_limit) ? ' ' : '\n';
         std::cout << upper.get_value() << '/'
-                  << lower.get_value() << space_or_nl
+                  << lower.get_value() << ' '
                   << std::flush;
         lower.incr();
     }
@@ -87,7 +83,7 @@ void test_counter_chain(int n) {
 }
 
 void test_sticky_counter(int n) {
-    FlexCounter<int, 3> sticky{[]{ return false; }};
+    FlexCounter<3> sticky{[]{ return false; }};
     for (int i = 0; i < n; ++i) {
         std::cout << sticky.get_value() << ' ' << std::flush;
         sticky.incr();
@@ -96,7 +92,7 @@ void test_sticky_counter(int n) {
 }
 
 void test_throwing_counter(int n) {
-    FlexCounter<int, 3> throwing{[]()-> bool { throw 42; }};
+    FlexCounter<3> throwing{[]()-> bool { throw 42; }};
     for (int i = 0; i < n; ++i) {
         try {
             throwing.incr();
@@ -111,7 +107,7 @@ void test_throwing_counter(int n) {
 }
 
 int main() {
-    test_counter_chain(19);
+    test_counter_chain(17);
     test_sticky_counter(5);
     test_throwing_counter(4);
 }
