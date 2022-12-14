@@ -11,9 +11,9 @@ i* Solution FlexCounter -- DOCUMENTATION NEEDS UPDATE
  * +-----------------------+  none of three classes below needs to
  * | std::function<void()> |  implement any particular interface;
  * +-----------------------+  they don't even need to participate
- *   ^                        in the same inheritance chain (ie.
- *   |                        the decision whether or not they do
- *   |                        by guided by other considerations)
+ *   ^                        in the same inheritance chain (the
+ *   |                        decision whether or not they do can
+ *   |                        be guided by other considerations)
  * : | : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :
  *   |      +--------------+
  *   |      | BasicCounter |
@@ -40,7 +40,7 @@ i* Solution FlexCounter -- DOCUMENTATION NEEDS UPDATE
 #include <climits>
 #include <functional>
 
-template<unsigned N>
+template<unsigned N = UINT_MAX>
 class FlexCounter {
 public:
     static const unsigned MAX = N;
@@ -56,8 +56,11 @@ private:
 
 template<unsigned N>
 bool FlexCounter<N>::incr() {
-    if (++value_ < MAX)
+    auto const lv = value_ + 1;
+    if (lv < MAX) {
+        value_ = lv;
         return true;
+    }
     if (next_ && next_()) {
         value_ = 0;
         return true;
@@ -65,17 +68,24 @@ bool FlexCounter<N>::incr() {
     return false;
 }
 
+// above: helper classes to built many DIFFERENT kinds of counters
 // ---------------------------------------------------------------
 // below: a SPECIFIC type of counter built from these classes
 
+#include <iomanip>
 #include <iostream>
+#include <string>
 
 void test_counter_chain(int n) {
+    std::cout << __func__ << std::endl;
     FlexCounter<3> upper{[]{ return true; }};
     FlexCounter<8> lower{[&upper]{ return upper.incr(); }};
     for (int i = 0; i < n; ++i) {
+        auto const lower_is_at_limit =
+            (lower.get_value()+1 == lower.MAX);
+        auto const space_or_nl = (not lower_is_at_limit) ? ' ' : '\n';
         std::cout << upper.get_value() << '/'
-                  << lower.get_value() << ' '
+                  << lower.get_value() << space_or_nl
                   << std::flush;
         lower.incr();
     }
@@ -106,8 +116,21 @@ void test_throwing_counter(int n) {
     }
 }
 
+class HhmmssChain {
+public:
+    HhmmssChain(bool true_or_false)
+        : hh{[=]{return true_or_false; }}
+    {}
+    void incr() { ss.incr(); }
+    std::string to_string() const;
+private:
+    FlexCounter<24> hh;
+    FlexCounter<60> mm{[this]{ return hh.incr(); }};
+    FlexCounter<60> ss{[this]{ return mm.incr(); }};
+};
+
 int main() {
-    test_counter_chain(17);
-    test_sticky_counter(5);
+    test_counter_chain(19);
+    test_sticky_counter(6);
     test_throwing_counter(4);
 }
