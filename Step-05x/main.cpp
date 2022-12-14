@@ -12,69 +12,77 @@
  *               | incr()           |  ALL counter classes below
  *               +------------------+  IMPLEMENT this interface
  *                     ^               directly or indirectly[*])
- *                     |
- *   +--------------+  |  +--------------+
- *   | BasicCounter |  |  | LimitCounter |  ...increment and
- *   |--------------|  |  |--------------|  :  eventually reset
- *   | +incr()...   |  |  | +incr()      |..:
- *   +----------:---+  |  +------.-------+
- *              :      |        /_\
- *              :      |         |          +-----------------+
- *  just increment     |         +----------| OverflowCounter |
- *                     |                    |-----------------|
- *                     +--------------------+ -overflowed()   |
- *                                    next_ +------:----------+
+ *   +--------------+  |
+ *   | BasicCounter |  |
+ *   |--------------|  |        (difference to prior version is
+ *   | +incr()...   |  |         now all three counters are in
+ *   +---:---.------+  |         single chain of inheritance)
+ *       :  /_\        |
+ *       :   |         |  +--------------+
+ *    just   +------------| LimitCounter |  ...increment and
+ *  increment          |  |--------------|  :  eventually reset
+ *                     |  | +incr()      |..:
+ *                     |  +------.-------+
+ *                     |      /_\
+ *                     |       |          +-----------------+
+ *                     |       +----------| OverflowCounter |
+ *                     |                  |-----------------|
+ *                     +------------------| -overflowed()   |
+ *                                  next_ +------:----------+
  *                                    :            :
  *                                    :            :
  *   *: any of the three counter classes    increment subsequent
  *    above can serve a subsequent stage        counter stage
-*/
+ */
 #include <climits>
 
-class I_Incrementable {
+class I_Incrementable
+{
 public:
-    virtual ~I_Incrementable() =default;
-    virtual void incr() =0;
+    virtual ~I_Incrementable() = default;
+    virtual void incr() = 0;
 };
 
-class BasicCounter : public I_Incrementable {
+class BasicCounter : public I_Incrementable
+{
 public:
     unsigned get_value() const { return value_; }
     void incr() override { ++value_; }
-private:
-    unsigned value_ = 0;
-};
 
-template<unsigned limit_ = UINT_MAX>
-class LimitCounter : public I_Incrementable {
-public:
-    LimitCounter() =default;
-    unsigned get_value() const { return value_; }
-    unsigned constexpr get_limit() { return limit_; }
-    void incr() override;
-private:
-    virtual void overflowed() { /*empty*/ }
+protected:
     unsigned value_ = 0;
 };
 
 template<unsigned limit_>
+class LimitCounter : public BasicCounter
+{
+public:
+    LimitCounter() = default;
+    static constexpr unsigned get_limit() { return limit_; }
+    void incr() override;
+
+private:
+    virtual void overflowed() { /*empty*/ }
+};
+
+template<unsigned limit_>
 void LimitCounter<limit_>::incr() {
-    if (++value_ == limit_) {
-        value_ = 0;
-        overflowed();
+    BasicCounter::incr();
+    if (get_value() >= limit_) {
+        value_ = 0; overflowed();
     }
 }
 
 template<unsigned limit_>
 class OverflowCounter : public LimitCounter<limit_> {
 public:
-    OverflowCounter(I_Incrementable& next)
+    OverflowCounter(I_Incrementable &next)
         : LimitCounter<limit_>{}, next_{next}
     {}
+
 private:
-    unsigned value_ = 0;
     void overflowed() override;
-    I_Incrementable& next_;
+    I_Incrementable &next_;
 };
 
 template<unsigned limit_>
@@ -91,11 +99,13 @@ void OverflowCounter<limit_>::overflowed() {
 #include <sstream>
 #include <string>
 
-class OperationHoursMeter {
+class OperationHoursMeter
+{
 public:
     OperationHoursMeter();
     std::string to_string() const;
     void incr();
+
 private:
     BasicCounter days_;
     OverflowCounter<24> hours_;

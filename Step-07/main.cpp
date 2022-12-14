@@ -1,22 +1,17 @@
+/*
+ * ===============================================================
+ * Connecting subsequent stages via `std::function` and lambdas
+ * ===============================================================
+ * This version is basically the same as a prior one except
+ * holds the limit as template argument, not in a data member.
+*/
 #include <climits>
+#include <functional>
 
-// shows a countdown in
-// - days,
-// - hours,
-// - minutes,
-// - seconds, and
-// - and tenth of a second
-
-class I_Incrementable {
-public:
-    virtual ~I_Incrementable() =default;
-    virtual void incr() =0;
-};
-
-class BasicCounter : public I_Incrementable {
+class BasicCounter {
 public:
     unsigned get_value() const { return value_; }
-    void incr() override { ++value_; }
+    void incr() { ++value_; }
     void reset() { value_ = 0;}
 private:
     unsigned value_ = 0;
@@ -26,16 +21,15 @@ template<unsigned limit_ = UINT_MAX>
 class LimitCounter : public BasicCounter {
 public:
     LimitCounter() =default;
-    unsigned get_value() const { return value_; }
-    unsigned get_limit() const { return limit_; }
-    void incr() override;
+    static constexpr unsigned get_limit() { return limit_; }
+    void incr();
 private:
     virtual void overflowed() { /*empty*/ }
 };
 
 template<unsigned limit_>
 void LimitCounter<limit_>::incr() {
-    Basic::Counter::incr();
+    BasicCounter::incr();
     if (get_value() == limit_) { // BasicCounter::get_value() ...
         reset();                 // BasicCounter::reset()
         overflowed();     // may be LimitCounter::overflowed()
@@ -46,17 +40,17 @@ void LimitCounter<limit_>::incr() {
 template<unsigned limit_>
 class OverflowCounter : public LimitCounter<limit_> {
 public:
-    OverflowCounter(unsigned limit, I_Incrementable& next)
-        : LimitCounter<limit_>{}, next_{next}
+    OverflowCounter(std::function<void()> next)
+        : next_{next}
     {}
 private:
     void overflowed() override;
-    I_Incrementable& next_;
+    std::function<void()> next_;
 };
 
 template<unsigned limit_>
 void OverflowCounter<limit_>::overflowed() {
-    next_.incr();
+    if (next_) next_();
 }
 
 // above: helper classes to built many DIFFERENT kinds of counters
@@ -83,10 +77,10 @@ private:
 
 OperationHoursMeter::OperationHoursMeter()
     : days_{}
-    , hours_{24, days_}
-    , minutes_{60, hours_}
-    , seconds_{60, minutes_}
-    , sec_10th_{10, seconds_}
+    , hours_{[this]{ days_.incr(); }}
+    , minutes_{[this]{ hours_.incr(); }}
+    , seconds_{[this]{ minutes_.incr(); }}
+    , sec_10th_{[this]{ seconds_.incr(); }}
 {}
 
 std::string OperationHoursMeter::to_string() const {

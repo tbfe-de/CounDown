@@ -1,11 +1,33 @@
+/*
+ * ===============================================================
+ * Connecting subsequent counter stages via an Interface
+ * ===============================================================
+ *
+ *                   <<interface>>
+ *               +------------------+
+ *               | I_Incrementable  |
+ *               |------------------|
+ *               | incr()           |  ALL counter classes below
+ *               +------------------+  IMPLEMENT this interface
+ *                     ^               directly or indirectly[*])
+ *                     |
+ *   +--------------+  |  +--------------+
+ *   | BasicCounter |  |  | LimitCounter |  ...increment and
+ *   |--------------|  |  |--------------|  :  eventually reset
+ *   | +incr()...   |  |  | +incr()      |..:
+ *   +----------:---+  |  +------.-------+
+ *              :      |        /_\
+ *              :      |         |          +-----------------+
+ *  just increment     |         +----------| OverflowCounter |
+ *                     |                    |-----------------|
+ *                     +--------------------+ -overflowed()   |
+ *                                    next_ +------:----------+
+ *                                    :            :
+ *                                    :            :
+ *   *: any of the three counter classes    increment subsequent
+ *    above can serve a subsequent stage        counter stage
+*/
 #include <climits>
-
-// shows a countdown in
-// - days,
-// - hours,
-// - minutes,
-// - seconds, and
-// - and tenth of a second
 
 class I_Incrementable {
 public:
@@ -24,6 +46,7 @@ private:
 class LimitCounter : public I_Incrementable {
 public:
     LimitCounter() =default;
+    unsigned get_value() const { return value_; }
     LimitCounter(unsigned limit)
         : limit_{limit}
     {}
@@ -49,6 +72,7 @@ public:
         : LimitCounter{limit}, next_{next}
     {}
 private:
+    unsigned value_ = 0;
     void overflowed() override;
     I_Incrementable& next_;
 };
@@ -110,7 +134,7 @@ void OperationHoursMeter::incr() {
 
 int main() {
     OperationHoursMeter test{};
-    for (int i = 0; i < 2222222; ++i) {
+    for (int i = 0; i < 2'222'222; ++i) {
         test.incr();
         std::cout << '\r' << test.to_string() << std::flush;
     }

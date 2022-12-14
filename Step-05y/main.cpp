@@ -8,26 +8,25 @@
  *                   <<interface>>
  *               +------------------+
  *               | I_Incrementable  |
- *               |------------------|
- *               | incr()           |  ALL counter classes below
- *               +------------------+  IMPLEMENT this interface
- *                     ^               directly or indirectly[*])
+ *               |------------------|  ALL counter classes below
+ *               | incr()           |  IMPLEMENT this interface
+ *               +------------------+  directly[*] but are NOT
+ *                     ^               in an inheritance chain
  *                     |
- *   +--------------+  |  +--------------+
- *   | BasicCounter |  |  | LimitCounter |  ...increment and
- *   |--------------|  |  |--------------|  :  eventually reset
- *   | +incr()...   |  |  | +incr()      |..:
- *   +----------:---+  |  +------.-------+
- *              :      |        /_\
- *              :      |         |          +-----------------+
- *  just increment     |         +----------| OverflowCounter |
- *                     |                    |-----------------|
- *                     +--------------------+ -overflowed()   |
- *                                    next_ +------:----------+
- *                                    :            :
- *                                    :            :
- *   *: any of the three counter classes    increment subsequent
- *    above can serve a subsequent stage        counter stage
+ *                     +----------------+
+ *                                      |
+ *  +--------------+  +--------------+  |     +-----------------+
+ *  | BasicCounter |  | LimitCounter |  |     | OverflowCounter |
+ *  |--------------|  |--------------|  |     |-----------------|
+ *  | +incr()...   |  | +incr()...   |  +-----| +incr()...      |
+ *  +----------:---+  +----------:---+  next_ +----------:------+
+ *              :                :                       :
+ *              :                :                       :
+ *  just increment    increment and                    increment,
+ *                   eventually reset           eventually reset,
+ *                                                  and then also
+ *   *: any of the three counter classes     increment subsequent
+ *    above can serve a subsequent stage            counter stage
 */
 #include <climits>
 
@@ -50,10 +49,9 @@ class LimitCounter : public I_Incrementable {
 public:
     LimitCounter() =default;
     unsigned get_value() const { return value_; }
-    unsigned constexpr get_limit() { return limit_; }
+    unsigned get_limit() const { return limit_; }
     void incr() override;
 private:
-    virtual void overflowed() { /*empty*/ }
     unsigned value_ = 0;
 };
 
@@ -61,25 +59,29 @@ template<unsigned limit_>
 void LimitCounter<limit_>::incr() {
     if (++value_ == limit_) {
         value_ = 0;
-        overflowed();
     }
 }
 
 template<unsigned limit_>
-class OverflowCounter : public LimitCounter<limit_> {
+class OverflowCounter : public I_Incrementable {
 public:
     OverflowCounter(I_Incrementable& next)
-        : LimitCounter<limit_>{}, next_{next}
+        : next_{next}
     {}
+    unsigned get_value() const { return value_; }
+    static constexpr unsigned get_limit() { return limit_; }
+    void incr() override;
 private:
     unsigned value_ = 0;
-    void overflowed() override;
     I_Incrementable& next_;
 };
 
 template<unsigned limit_>
-void OverflowCounter<limit_>::overflowed() {
-    next_.incr();
+void OverflowCounter<limit_>::incr() {
+    if (++value_ == limit_) {
+        value_ = 0;
+        next_.incr();
+    }
 }
 
 // above: helper classes to built many DIFFERENT kinds of counters

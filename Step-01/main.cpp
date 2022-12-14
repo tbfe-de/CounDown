@@ -1,3 +1,20 @@
+/*
+ * ===============================================================
+ * Implemented as a sequence of a single type of class
+ * ===============================================================
+ *
+ *                +------------------+
+ *         +----->| ChainableCounter |
+ *         | 0..1 |------------------|      (as class)
+ *         |      | value_           |
+ *         +------| limit_           |
+ *          next_ +------------------+
+ *                                          (as objects)
+ *      +-----+   +------+   +--------+   +--------+   +---------+
+ *  0<--|days_|<--|hours_|<--|minutes_|<--|seconds_|<--|sec_10th_|
+ *      +-----+   +------+   +--------+   +--------+   +---------+
+*/
+
 #include <climits>
 
 // shows a countdown in
@@ -77,7 +94,7 @@ std::string OperationHoursMeter::to_string() const {
 
 int main() {
     OperationHoursMeter test{};
-    for (int i = 0; i < 2222222; ++i) {
+    for (int i = 0; i < 2'222'222; ++i) {
         test.incr();
         std::cout << '\r' << test.to_string() << std::flush;
     }

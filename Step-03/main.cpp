@@ -1,11 +1,36 @@
-#include <climits>
+/*
+ * ===============================================================
+ * Applying the "Non Virtual Interface" Idiom (NVI)
+ * ===============================================================
+ *
+ *            +------------------+
+ *     +----->|   LimitCounter   |  (base class)
+ *     |    1 |------------------|
+ *     |      | -value_          |  ...increments value_ AND CALLS
+ *     |      | -limit_          |  :  overflowed() WHEN value_ IS
+ *     |      |------------------|  :  RESET to 0
+ *     |      | +incr()          |..:
+ *     |      | -overflowed()    |.....is implemented empty here
+ *     |      +---------.--------+
+ *     |               /_\
+ *     |                |           (derived class)
+ *     |      +------------------+
+ *     |      |  OverflowCounter |  ...OVERRIDES inherited (empty)
+ *     +------|------------------|  :  implementation to increment
+ *       next_| -overflowed()    |..:  counter stage connected via
+ *            +------------------+     next_
+ *
+ *   +-----+   +------+   +--------+   +--------+   +---------+
+ *   |days_|<--|hours_|<--|minutes_|<--|seconds_|<--|sec_10th_|
+ *   +-----+   +------+   +--------+   +--------+   +---------+
+ *  \___.___/ \________________________._______________________/
+ *      :                              :
+ *      :                              :        (as objects)
+ *     LimitCounter    OverflowCounter(s)
+ *
+*/
 
-// shows a countdown in
-// - days,
-// - hours,
-// - minutes,
-// - seconds, and
-// - and tenth of a second
+#include <climits>
 
 class LimitCounter {
 public:
@@ -96,7 +121,7 @@ void OperationHoursMeter::incr() {
 
 int main() {
     OperationHoursMeter test{};
-    for (int i = 0; i < 2222222; ++i) {
+    for (int i = 0; i < 2'222'222; ++i) {
         test.incr();
         std::cout << '\r' << test.to_string() << std::flush;
     }

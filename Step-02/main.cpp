@@ -1,11 +1,36 @@
-#include <climits>
+/*
+ * ===============================================================
+ * Implemented as a sequence of two types of classes
+ * ===============================================================
+ *
+ *            +------------------+
+ *     +----->|   LimitCounter   |
+ *     |    1 |------------------|
+ *     |      | -value_          |  (base class)
+ *     |      | -limit_          |
+ *     |      |------------------|   ... incr() implemented to
+ *     |      | +incr()          |...:   fall back to 0 when
+ *     |      +---------.--------+       limit_ is reached
+ *     |               /_\
+ *     |                |           (derived class)
+ *     |      +------------------+
+ *     |      |  OverflowCounter |   ... OVERRIDES incr() to
+ *     |      |------------------|   :   increment value_ in base
+ *     +------| +incr()          |...:   class AND IF limit_ IS
+ *      next_ +------------------+       REACHED ALSO the counter
+ *                                       stage connected via next_
+ *
+ *   +-----+   +------+   +--------+   +--------+   +---------+
+ *   |days_|<--|hours_|<--|minutes_|<--|seconds_|<--|sec_10th_|
+ *   +-----+   +------+   +--------+   +--------+   +---------+
+ *  \___.___/ \________________________._______________________/
+ *      :                              :
+ *      :                              :        (as objects)
+ *     LimitCounter    OverflowCounter(s)
+ *
+*/
 
-// shows a countdown in
-// - days,
-// - hours,
-// - minutes,
-// - seconds, and
-// - and tenth of a second
+#include <climits>
 
 class LimitCounter {
 public:
@@ -95,7 +120,7 @@ void OperationHoursMeter::incr() {
 
 int main() {
     OperationHoursMeter test{};
-    for (int i = 0; i < 2222222; ++i) {
+    for (int i = 0; i < 2'222'222; ++i) {
         test.incr();
         std::cout << '\r' << test.to_string() << std::flush;
     }

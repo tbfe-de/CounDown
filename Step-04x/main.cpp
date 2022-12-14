@@ -2,8 +2,6 @@
  * ===============================================================
  * Connecting subsequent counter stages via an Interface
  * ===============================================================
- * This version is basically the same as a prior one except
- * holds the limit as template argument, not in a data member.
  *
  *                   <<interface>>
  *               +------------------+
@@ -12,73 +10,91 @@
  *               | incr()           |  ALL counter classes below
  *               +------------------+  IMPLEMENT this interface
  *                     ^               directly or indirectly[*])
- *                     |
- *   +--------------+  |  +--------------+
- *   | BasicCounter |  |  | LimitCounter |  ...increment and
- *   |--------------|  |  |--------------|  :  eventually reset
- *   | +incr()...   |  |  | +incr()      |..:
- *   +----------:---+  |  +------.-------+
- *              :      |        /_\
- *              :      |         |          +-----------------+
- *  just increment     |         +----------| OverflowCounter |
- *                     |                    |-----------------|
- *                     +--------------------+ -overflowed()   |
- *                                    next_ +------:----------+
+ *   +--------------+  |
+ *   | BasicCounter |  |
+ *   |--------------|  |        (difference to prior version is
+ *   | +incr()...   |  |         now all three counters are in
+ *   +---:---.------+  |         single chain of inheritance)
+ *       :  /_\        |
+ *       :   |         |  +--------------+
+ *    just   +------------| LimitCounter |  ...increment and
+ *  increment          |  |--------------|  :  eventually reset
+ *                     |  | +incr()      |..:
+ *                     |  +------.-------+
+ *                     |      /_\
+ *                     |       |          +-----------------+
+ *                     |       +----------| OverflowCounter |
+ *                     |                  |-----------------|
+ *                     +------------------| -overflowed()   |
+ *                                  next_ +------:----------+
  *                                    :            :
  *                                    :            :
  *   *: any of the three counter classes    increment subsequent
  *    above can serve a subsequent stage        counter stage
-*/
+ */
 #include <climits>
 
-class I_Incrementable {
+class I_Incrementable
+{
 public:
-    virtual ~I_Incrementable() =default;
-    virtual void incr() =0;
+    virtual ~I_Incrementable() = default;
+    virtual void incr() = 0;
 };
 
-class BasicCounter : public I_Incrementable {
+class BasicCounter : public I_Incrementable
+{
 public:
     unsigned get_value() const { return value_; }
     void incr() override { ++value_; }
-private:
+
+protected:
     unsigned value_ = 0;
 };
 
-template<unsigned limit_ = UINT_MAX>
-class LimitCounter : public I_Incrementable {
+class LimitCounter : public BasicCounter
+{
 public:
-    LimitCounter() =default;
-    unsigned get_value() const { return value_; }
-    unsigned constexpr get_limit() { return limit_; }
+    LimitCounter() = default;
+    LimitCounter(unsigned limit)
+        : limit_{limit}
+    {
+    }
+    unsigned get_limit() const { return limit_; }
     void incr() override;
+
 private:
-    virtual void overflowed() { /*empty*/ }
-    unsigned value_ = 0;
+    virtual void overflowed()
+    { /*empty*/
+    }
+    unsigned const limit_ = UINT_MAX;
 };
 
-template<unsigned limit_>
-void LimitCounter<limit_>::incr() {
-    if (++value_ == limit_) {
+void LimitCounter::incr()
+{
+    BasicCounter::incr();
+    if (get_value() >= limit_)
+    {
         value_ = 0;
         overflowed();
     }
 }
 
-template<unsigned limit_>
-class OverflowCounter : public LimitCounter<limit_> {
+class OverflowCounter : public LimitCounter
+{
+
 public:
-    OverflowCounter(I_Incrementable& next)
-        : LimitCounter<limit_>{}, next_{next}
-    {}
+    OverflowCounter(unsigned limit, I_Incrementable &next)
+        : LimitCounter{limit}, next_{next}
+    {
+    }
+
 private:
-    unsigned value_ = 0;
     void overflowed() override;
-    I_Incrementable& next_;
+    I_Incrementable &next_;
 };
 
-template<unsigned limit_>
-void OverflowCounter<limit_>::overflowed() {
+void OverflowCounter::overflowed()
+{
     next_.incr();
 }
 
@@ -91,28 +107,28 @@ void OverflowCounter<limit_>::overflowed() {
 #include <sstream>
 #include <string>
 
-class OperationHoursMeter {
+class OperationHoursMeter
+{
 public:
     OperationHoursMeter();
     std::string to_string() const;
     void incr();
+
 private:
     BasicCounter days_;
-    OverflowCounter<24> hours_;
-    OverflowCounter<60> minutes_;
-    OverflowCounter<60> seconds_;
-    OverflowCounter<10> sec_10th_;
+    OverflowCounter hours_;
+    OverflowCounter minutes_;
+    OverflowCounter seconds_;
+    OverflowCounter sec_10th_;
 };
 
 OperationHoursMeter::OperationHoursMeter()
-    : days_{}
-    , hours_{days_}
-    , minutes_{hours_}
-    , seconds_{minutes_}
-    , sec_10th_{seconds_}
-{}
+    : days_{}, hours_{24, days_}, minutes_{60, hours_}, seconds_{60, minutes_}, sec_10th_{10, seconds_}
+{
+}
 
-std::string OperationHoursMeter::to_string() const {
+std::string OperationHoursMeter::to_string() const
+{
     std::ostringstream os{};
     os.fill('0');
     os << days_.get_value()
@@ -127,15 +143,18 @@ std::string OperationHoursMeter::to_string() const {
     return os.str();
 }
 
-void OperationHoursMeter::incr() {
+void OperationHoursMeter::incr()
+{
     sec_10th_.incr();
 }
 
 #include <iostream>
 
-int main() {
+int main()
+{
     OperationHoursMeter test{};
-    for (int i = 0; i < 2'222'222; ++i) {
+    for (int i = 0; i < 2'222'222; ++i)
+    {
         test.incr();
         std::cout << '\r' << test.to_string() << std::flush;
     }

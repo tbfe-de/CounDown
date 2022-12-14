@@ -1,9 +1,17 @@
-// a counter to count
-// - days,
-// - hours,
-// - minutes,
-// - seconds, and
-// - and tenth of a second
+/*
+ * ===============================================================
+ * Straight Forward Direct Implementation
+ * ===============================================================
+ * The `OperarionHoursMeter` is expected to be ticked every 100ms
+ * and accumulates the number of ticks as:
+ *  - basically unlimited full days
+ *  - 0..23 as hours within a single day
+ *  - 0..59 minutes within a single hour
+ *  - 0..59 seconds within a single minute
+ *  - 0..9 fractional digits
+ * The member functions `to_string` returns this in a human
+ * readable format.
+*/
 
 #include <string>
 
