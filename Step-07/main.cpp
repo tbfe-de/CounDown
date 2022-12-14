@@ -4,6 +4,35 @@
  * ===============================================================
  * This version is basically the same as a prior one except
  * holds the limit as template argument, not in a data member.
+ *
+ * +-----------------------+  none of three classes below needs to
+ * | std::function<void()> |  implement any particular interface;
+ * +-----------------------+  they don't even need to participate
+ *   ^                        in the same inheritance chain (ie.
+ *   |                        the decision whether or not they do
+ *   |                        by guided by other considerations)
+ * : | : : : : : : : : : : : : : : : : : : : : : : : : : : : : : :
+ *   |      +--------------+
+ *   |      | BasicCounter |
+ *   |      |--------------|      (difference to prior version is
+ *   |      | +incr()...   |       now all three counters are in
+ *   |      +--:----.------+       single chain of inheritance)
+ *   |         :   /_\
+ *   |         :    |      +--------------+
+ *   |       just   +------| LimitCounter |  ...increment and
+ *   |  increment          |--------------|  :  eventually reset
+ *   |                     | +incr()      |..:
+ *   |                     +------.-------+
+ *   |                           /_\
+ *   |                            |       +-----------------+
+ *   |                            + ------| OverflowCounter |
+ *   |                                    |-----------------|
+ *   +------------------------------------| -overflowed()   |
+ *                                  next_ +------:----------+
+ *                                    :            :
+ *                                    :            :
+ *   *: any of the three counter classes    increment subsequent
+ *    above can serve a subsequent stage        counter stage
 */
 #include <climits>
 #include <functional>

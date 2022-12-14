@@ -3,29 +3,29 @@
  * Connecting subsequent counter stages via an Interface
  * ===============================================================
  *
- *                   <<interface>>
- *               +------------------+
- *               | I_Incrementable  |
- *               |------------------|
- *               | incr()           |  ALL counter classes below
- *               +------------------+  IMPLEMENT this interface
- *                     ^               directly or indirectly[*])
- *   +--------------+  |
- *   | BasicCounter |  |
- *   |--------------|  |        (difference to prior version is
- *   | +incr()...   |  |         now all three counters are in
- *   +---:---.------+  |         single chain of inheritance)
- *       :  /_\        |
- *       :   |         |  +--------------+
- *    just   +------------| LimitCounter |  ...increment and
- *  increment          |  |--------------|  :  eventually reset
- *                     |  | +incr()      |..:
- *                     |  +------.-------+
- *                     |      /_\
- *                     |       |          +-----------------+
- *                     |       +----------| OverflowCounter |
- *                     |                  |-----------------|
- *                     +------------------| -overflowed()   |
+ *     <<interface>>
+ * +------------------+
+ * | I_Incrementable  |
+ * |------------------|  ALL counter classes below
+ * | incr()           |  IMPLEMENT this interface
+ * +------------------+  directly or indirectly[*])
+ *   ^
+ *   |      +--------------+
+ *   |      | BasicCounter |
+ *   |      |--------------|      (difference to prior version is
+ *   |      | +incr()...   |       now all three counters are in
+ *   |      +---:---.------+       single chain of inheritance)
+ *   |          :  /_\
+ *   |          :   |      +--------------+
+ *   |        just  +------| LimitCounter |  ...increment and
+ *   |   increment         |--------------|  :  eventually reset
+ *   |                     | +incr()      |..:
+ *   |                     +------.-------+
+ *   |                           /_\
+ *   |                            |       +-----------------+
+ *   |                            + ------| OverflowCounter |
+ *   |                                    |-----------------|
+ *   +------------------------------------| -overflowed()   |
  *                                  next_ +------:----------+
  *                                    :            :
  *                                    :            :
