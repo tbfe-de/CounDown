@@ -39,8 +39,10 @@ i* Solution FlexCounter -- DOCUMENTATION NEEDS UPDATE
 */
 #include <climits>
 #include <functional>
+#include <limits>
+#include <type_traits>
 
-template<typename T, T N>
+template<typename T, T N = std::numeric_limits<T>::max()>
 class FlexCounter {
 public:
     using value_type = T;
@@ -51,14 +53,17 @@ public:
     value_type get_value() const { return value_; }
     bool incr();
 private:
-    value_type value_ = 0;
+    value_type value_ = value_type{};
     std::function<bool()> next_;
 };
 
 template<typename T, T N>
 bool FlexCounter<T, N>::incr() {
-    if (++value_ < MAX)
+    auto const lv = value_ + 1;
+    if (lv < MAX) {
+        value_ = lv;
         return true;
+    }
     if (next_ && next_()) {
         value_ = value_type{};
         return true;
@@ -66,18 +71,21 @@ bool FlexCounter<T, N>::incr() {
     return false;
 }
 
+// above: helper classes to built many DIFFERENT kinds of counters
 // ---------------------------------------------------------------
 // below: a SPECIFIC type of counter built from these classes
 
 #include <iostream>
+#include <thread>
 
 void test_counter_chain(int n) {
+    std::cout << "== " << __func__ << " ==" << std::endl;
     FlexCounter<int, 3> upper{[]{ return true; }};
-    FlexCounter<int, 8> lower{[&upper]{ return upper.incr(); }};
+    FlexCounter<int, 7> lower{[&upper]{ return upper.incr(); }};
     for (int i = 0; i < n; ++i) {
-        auto const lower_at_limit =
-            (lower.get_value()+1 == decltype(lower)::MAX);
-        auto const space_or_nl = (not lower_at_limit) ? ' ' : '\n';
+        auto const lower_not_at_limit =
+            (lower.get_value()+1 != lower.MAX);
+        auto const space_or_nl = lower_not_at_limit ? ' ' : '\n';
         std::cout << upper.get_value() << '/'
                   << lower.get_value() << space_or_nl
                   << std::flush;
@@ -86,16 +94,8 @@ void test_counter_chain(int n) {
     std::cout << std::endl;
 }
 
-void test_sticky_counter(int n) {
-    FlexCounter<int, 3> sticky{[]{ return false; }};
-    for (int i = 0; i < n; ++i) {
-        std::cout << sticky.get_value() << ' ' << std::flush;
-        sticky.incr();
-    }
-    std::cout << std::endl;
-}
-
 void test_throwing_counter(int n) {
+    std::cout << "== " << __func__ << " ==" << std::endl;
     FlexCounter<int, 3> throwing{[]()-> bool { throw 42; }};
     for (int i = 0; i < n; ++i) {
         try {
@@ -104,14 +104,64 @@ void test_throwing_counter(int n) {
                       << ' ' << std::flush;
         }
         catch(int ex) {
-            std::cout << "--- exception caught: "
+            std::cout << "---exception caught: "
                       << ex << std::endl;
         }
     }
 }
 
+class HhmmssChain {
+public:
+    HhmmssChain(bool true_or_false)
+        : hh{[=]{return true_or_false; }}
+    {}
+    void incr() { ss.incr(); }
+    std::string to_string() const;
+private:
+    FlexCounter<int, 24> hh;
+    FlexCounter<int, 60> mm{[this]{ return hh.incr(); }};
+    FlexCounter<int, 60> ss{[this]{ return mm.incr(); }};
+};
+
+std::string HhmmssChain::to_string() const {
+    std::string result;
+    if (hh.get_value() < 10) result += "0";
+    result += std::to_string(hh.get_value());
+    result += ":";
+    if (mm.get_value() < 10) result += "0";
+    result += std::to_string(mm.get_value());
+    result += ":";
+    if (ss.get_value() < 10) result += "0";
+    result += std::to_string(ss.get_value());
+    return result;
+}
+
+void test_hhmmss_chain(int n1, int n2) {
+    std::cout << "==== " << __func__ << " ====" << std::endl;
+    HhmmssChain resetting_hhmmss{true};
+    HhmmssChain sticky_hhmmss{false};
+    auto const old_fill = std::cout.fill('0');
+    for (int i = 0; i < n1-n2; ++i) {
+        resetting_hhmmss.incr();
+        sticky_hhmmss.incr();
+    }
+    for (int i = 0; i < 2*n2; ++i) {
+        resetting_hhmmss.incr();
+        sticky_hhmmss.incr();
+        std::cout << '\r'
+                  << resetting_hhmmss.to_string()
+                  << " <-------> "
+                  << sticky_hhmmss.to_string()
+                  << std::flush;
+        using namespace std::chrono_literals;
+        std::this_thread::sleep_for(17ms);
+    }
+    std::cout.fill(old_fill);
+    std::cout << std::endl;
+}
+
 int main() {
-    test_counter_chain(19);
-    test_sticky_counter(5);
+    test_counter_chain(25);
     test_throwing_counter(4);
+    test_hhmmss_chain(24*60*60, 333);
 }

@@ -1,0 +1,350 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_OUTPUT_EXCMD	number	/number, pattern, mixed, or combineV2/
+!_TAG_OUTPUT_FILESEP	slash	/slash or backslash/
+!_TAG_OUTPUT_MODE	u-ctags	/u-ctags or e-ctags/
+!_TAG_PATTERN_LENGTH_LIMIT	96	/0 for no limit/
+!_TAG_PROC_CWD	/home/mw/Downloads/CounDown/	//
+!_TAG_PROGRAM_AUTHOR	Universal Ctags Team	//
+!_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
+!_TAG_PROGRAM_URL	https://ctags.io/	/official site/
+!_TAG_PROGRAM_VERSION	5.9.0	//
+BasicCounter	Step-04/main.cpp	38;"	c	file:	inherits:I_Incrementable
+BasicCounter	Step-04x/main.cpp	44;"	c	file:	inherits:I_Incrementable
+BasicCounter	Step-04y/main.cpp	37;"	c	file:	inherits:I_Incrementable
+BasicCounter	Step-05/main.cpp	40;"	c	file:	inherits:I_Incrementable
+BasicCounter	Step-05x/main.cpp	46;"	c	file:	inherits:I_Incrementable
+BasicCounter	Step-05y/main.cpp	39;"	c	file:	inherits:I_Incrementable
+BasicCounter	Step-06/main.cpp	38;"	c	file:
+BasicCounter	Step-07/main.cpp	40;"	c	file:
+ChainableCounter	Step-01/main.cpp	27;"	c	file:
+ChainableCounter	Step-01/main.cpp	30;"	f	class:ChainableCounter	file:
+CounDown	README.md	1;"	c
+FlexCounter	Step-08/main.cpp	44;"	c	file:
+FlexCounter	Step-08/main.cpp	47;"	f	class:FlexCounter	file:
+FlexCounter	Step-09/main.cpp	45;"	c	file:
+FlexCounter	Step-09/main.cpp	49;"	f	class:FlexCounter	file:
+I_Incrementable	Step-04/main.cpp	32;"	c	file:
+I_Incrementable	Step-04x/main.cpp	37;"	c	file:
+I_Incrementable	Step-04y/main.cpp	31;"	c	file:
+I_Incrementable	Step-05/main.cpp	34;"	c	file:
+I_Incrementable	Step-05x/main.cpp	39;"	c	file:
+I_Incrementable	Step-05y/main.cpp	33;"	c	file:
+LimitCounter	Step-02/main.cpp	35;"	c	file:
+LimitCounter	Step-02/main.cpp	38;"	f	class:LimitCounter	file:
+LimitCounter	Step-03/main.cpp	35;"	c	file:
+LimitCounter	Step-03/main.cpp	38;"	f	class:LimitCounter	file:
+LimitCounter	Step-04/main.cpp	46;"	c	file:	inherits:I_Incrementable
+LimitCounter	Step-04/main.cpp	50;"	f	class:LimitCounter	file:
+LimitCounter	Step-04x/main.cpp	54;"	c	file:	inherits:BasicCounter
+LimitCounter	Step-04x/main.cpp	58;"	f	class:LimitCounter	file:
+LimitCounter	Step-04y/main.cpp	45;"	c	file:	inherits:I_Incrementable
+LimitCounter	Step-04y/main.cpp	49;"	f	class:LimitCounter	file:
+LimitCounter	Step-05/main.cpp	49;"	c	file:	inherits:I_Incrementable
+LimitCounter	Step-05x/main.cpp	57;"	c	file:	inherits:BasicCounter
+LimitCounter	Step-05y/main.cpp	48;"	c	file:	inherits:I_Incrementable
+LimitCounter	Step-06/main.cpp	47;"	c	file:	inherits:BasicCounter
+LimitCounter	Step-06/main.cpp	50;"	f	class:LimitCounter	file:
+LimitCounter	Step-07/main.cpp	50;"	c	file:	inherits:BasicCounter
+MAX	Step-08/main.cpp	46;"	m	class:FlexCounter	typeref:typename:const unsigned	file:
+MAX	Step-09/main.cpp	48;"	m	class:FlexCounter	typeref:typename:const value_type	file:
+OperationHoursMeter	Step-00/main.cpp	18;"	c	file:
+OperationHoursMeter	Step-01/main.cpp	57;"	c	file:
+OperationHoursMeter	Step-01/main.cpp	70;"	f	class:OperationHoursMeter
+OperationHoursMeter	Step-02/main.cpp	79;"	c	file:
+OperationHoursMeter	Step-02/main.cpp	92;"	f	class:OperationHoursMeter
+OperationHoursMeter	Step-03/main.cpp	80;"	c	file:
+OperationHoursMeter	Step-03/main.cpp	93;"	f	class:OperationHoursMeter
+OperationHoursMeter	Step-04/main.cpp	106;"	f	class:OperationHoursMeter
+OperationHoursMeter	Step-04/main.cpp	93;"	c	file:
+OperationHoursMeter	Step-04x/main.cpp	110;"	c	file:
+OperationHoursMeter	Step-04x/main.cpp	125;"	f	class:OperationHoursMeter
+OperationHoursMeter	Step-04y/main.cpp	107;"	f	class:OperationHoursMeter
+OperationHoursMeter	Step-04y/main.cpp	94;"	c	file:
+OperationHoursMeter	Step-05/main.cpp	107;"	f	class:OperationHoursMeter
+OperationHoursMeter	Step-05/main.cpp	94;"	c	file:
+OperationHoursMeter	Step-05x/main.cpp	102;"	c	file:
+OperationHoursMeter	Step-05x/main.cpp	117;"	f	class:OperationHoursMeter
+OperationHoursMeter	Step-05y/main.cpp	109;"	f	class:OperationHoursMeter
+OperationHoursMeter	Step-05y/main.cpp	96;"	c	file:
+OperationHoursMeter	Step-06/main.cpp	105;"	f	class:OperationHoursMeter
+OperationHoursMeter	Step-06/main.cpp	92;"	c	file:
+OperationHoursMeter	Step-07/main.cpp	107;"	f	class:OperationHoursMeter
+OperationHoursMeter	Step-07/main.cpp	94;"	c	file:
+OverflowCounter	Step-02/main.cpp	54;"	c	file:	inherits:LimitCounter
+OverflowCounter	Step-02/main.cpp	56;"	f	class:OverflowCounter	file:
+OverflowCounter	Step-03/main.cpp	57;"	c	file:	inherits:LimitCounter
+OverflowCounter	Step-03/main.cpp	59;"	f	class:OverflowCounter	file:
+OverflowCounter	Step-04/main.cpp	68;"	c	file:	inherits:LimitCounter
+OverflowCounter	Step-04/main.cpp	71;"	f	class:OverflowCounter	file:
+OverflowCounter	Step-04x/main.cpp	82;"	c	file:	inherits:LimitCounter
+OverflowCounter	Step-04x/main.cpp	86;"	f	class:OverflowCounter	file:
+OverflowCounter	Step-04y/main.cpp	65;"	c	file:	inherits:I_Incrementable
+OverflowCounter	Step-04y/main.cpp	67;"	f	class:OverflowCounter	file:
+OverflowCounter	Step-05/main.cpp	69;"	c	file:	inherits:LimitCounter<limit_>
+OverflowCounter	Step-05/main.cpp	71;"	f	class:OverflowCounter	file:
+OverflowCounter	Step-05x/main.cpp	77;"	c	file:	inherits:LimitCounter<limit_>
+OverflowCounter	Step-05x/main.cpp	79;"	f	class:OverflowCounter	file:
+OverflowCounter	Step-05y/main.cpp	66;"	c	file:	inherits:I_Incrementable
+OverflowCounter	Step-05y/main.cpp	68;"	f	class:OverflowCounter	file:
+OverflowCounter	Step-06/main.cpp	69;"	c	file:	inherits:LimitCounter
+OverflowCounter	Step-06/main.cpp	71;"	f	class:OverflowCounter	file:
+OverflowCounter	Step-07/main.cpp	70;"	c	file:	inherits:LimitCounter<limit_>
+OverflowCounter	Step-07/main.cpp	72;"	f	class:OverflowCounter	file:
+__anon6233f1990102	Step-06/main.cpp	107;"	f	file:
+__anon6233f1990202	Step-06/main.cpp	108;"	f	file:
+__anon6233f1990302	Step-06/main.cpp	109;"	f	file:
+__anon6233f1990402	Step-06/main.cpp	110;"	f	file:
+__anon663e82ba0102	Step-07/main.cpp	109;"	f	file:
+__anon663e82ba0202	Step-07/main.cpp	110;"	f	file:
+__anon663e82ba0302	Step-07/main.cpp	111;"	f	file:
+__anon663e82ba0402	Step-07/main.cpp	112;"	f	file:
+__anon6a4913db0102	Step-08/main.cpp	76;"	f	function:test_counter_chain	file:
+__anon6a4913db0202	Step-08/main.cpp	77;"	f	function:test_counter_chain	file:
+__anon6a4913db0302	Step-08/main.cpp	88;"	f	function:test_sticky_counter	file:
+__anon6a4913db0402	Step-08/main.cpp	97;"	f	function:test_throwing_counter	typeref:typename:bool	file:
+__anon6e53a4fc0102	Step-09/main.cpp	76;"	f	function:test_counter_chain	file:
+__anon6e53a4fc0202	Step-09/main.cpp	77;"	f	function:test_counter_chain	file:
+__anon6e53a4fc0302	Step-09/main.cpp	91;"	f	function:test_sticky_counter	file:
+__anon6e53a4fc0402	Step-09/main.cpp	100;"	f	function:test_throwing_counter	typeref:typename:bool	file:
+clean	Step-00/Makefile	3;"	t
+clean	Step-01/Makefile	3;"	t
+clean	Step-02/Makefile	3;"	t
+clean	Step-03/Makefile	3;"	t
+clean	Step-04/Makefile	3;"	t
+clean	Step-04x/Makefile	3;"	t
+clean	Step-04y/Makefile	3;"	t
+clean	Step-05/Makefile	3;"	t
+clean	Step-05x/Makefile	3;"	t
+clean	Step-05y/Makefile	3;"	t
+clean	Step-06/Makefile	3;"	t
+clean	Step-07/Makefile	3;"	t
+clean	Step-08/Makefile	3;"	t
+clean	Step-09/Makefile	3;"	t
+days_	Step-01/main.cpp	63;"	m	class:OperationHoursMeter	typeref:typename:ChainableCounter	file:
+days_	Step-02/main.cpp	85;"	m	class:OperationHoursMeter	typeref:typename:LimitCounter	file:
+days_	Step-03/main.cpp	86;"	m	class:OperationHoursMeter	typeref:typename:LimitCounter	file:
+days_	Step-04/main.cpp	99;"	m	class:OperationHoursMeter	typeref:typename:BasicCounter	file:
+days_	Step-04x/main.cpp	118;"	m	class:OperationHoursMeter	typeref:typename:BasicCounter	file:
+days_	Step-04y/main.cpp	100;"	m	class:OperationHoursMeter	typeref:typename:BasicCounter	file:
+days_	Step-05/main.cpp	100;"	m	class:OperationHoursMeter	typeref:typename:BasicCounter	file:
+days_	Step-05x/main.cpp	110;"	m	class:OperationHoursMeter	typeref:typename:BasicCounter	file:
+days_	Step-05y/main.cpp	102;"	m	class:OperationHoursMeter	typeref:typename:BasicCounter	file:
+days_	Step-06/main.cpp	98;"	m	class:OperationHoursMeter	typeref:typename:BasicCounter	file:
+days_	Step-07/main.cpp	100;"	m	class:OperationHoursMeter	typeref:typename:BasicCounter	file:
+get_limit	Step-01/main.cpp	34;"	f	class:ChainableCounter	typeref:typename:unsigned	file:
+get_limit	Step-02/main.cpp	42;"	f	class:LimitCounter	typeref:typename:unsigned	file:
+get_limit	Step-03/main.cpp	42;"	f	class:LimitCounter	typeref:typename:unsigned	file:
+get_limit	Step-04/main.cpp	53;"	f	class:LimitCounter	typeref:typename:unsigned	file:
+get_limit	Step-04x/main.cpp	62;"	f	class:LimitCounter	typeref:typename:unsigned	file:
+get_limit	Step-04y/main.cpp	52;"	f	class:LimitCounter	typeref:typename:unsigned	file:
+get_limit	Step-05/main.cpp	53;"	f	class:LimitCounter	typeref:typename:unsigned 	file:
+get_limit	Step-05x/main.cpp	61;"	f	class:LimitCounter	typeref:typename:unsigned	file:
+get_limit	Step-05y/main.cpp	52;"	f	class:LimitCounter	typeref:typename:unsigned	file:
+get_limit	Step-05y/main.cpp	72;"	f	class:OverflowCounter	typeref:typename:unsigned	file:
+get_limit	Step-06/main.cpp	53;"	f	class:LimitCounter	typeref:typename:unsigned	file:
+get_limit	Step-07/main.cpp	53;"	f	class:LimitCounter	typeref:typename:unsigned	file:
+get_value	Step-01/main.cpp	33;"	f	class:ChainableCounter	typeref:typename:unsigned	file:
+get_value	Step-02/main.cpp	41;"	f	class:LimitCounter	typeref:typename:unsigned	file:
+get_value	Step-03/main.cpp	41;"	f	class:LimitCounter	typeref:typename:unsigned	file:
+get_value	Step-04/main.cpp	40;"	f	class:BasicCounter	typeref:typename:unsigned	file:
+get_value	Step-04/main.cpp	49;"	f	class:LimitCounter	typeref:typename:unsigned	file:
+get_value	Step-04x/main.cpp	47;"	f	class:BasicCounter	typeref:typename:unsigned	file:
+get_value	Step-04y/main.cpp	39;"	f	class:BasicCounter	typeref:typename:unsigned	file:
+get_value	Step-04y/main.cpp	48;"	f	class:LimitCounter	typeref:typename:unsigned	file:
+get_value	Step-04y/main.cpp	70;"	f	class:OverflowCounter	typeref:typename:unsigned	file:
+get_value	Step-05/main.cpp	42;"	f	class:BasicCounter	typeref:typename:unsigned	file:
+get_value	Step-05/main.cpp	52;"	f	class:LimitCounter	typeref:typename:unsigned	file:
+get_value	Step-05x/main.cpp	49;"	f	class:BasicCounter	typeref:typename:unsigned	file:
+get_value	Step-05y/main.cpp	41;"	f	class:BasicCounter	typeref:typename:unsigned	file:
+get_value	Step-05y/main.cpp	51;"	f	class:LimitCounter	typeref:typename:unsigned	file:
+get_value	Step-05y/main.cpp	71;"	f	class:OverflowCounter	typeref:typename:unsigned	file:
+get_value	Step-06/main.cpp	40;"	f	class:BasicCounter	typeref:typename:unsigned	file:
+get_value	Step-07/main.cpp	42;"	f	class:BasicCounter	typeref:typename:unsigned	file:
+get_value	Step-08/main.cpp	50;"	f	class:FlexCounter	typeref:typename:unsigned	file:
+get_value	Step-09/main.cpp	52;"	f	class:FlexCounter	typeref:typename:value_type	file:
+hours_	Step-01/main.cpp	64;"	m	class:OperationHoursMeter	typeref:typename:ChainableCounter	file:
+hours_	Step-02/main.cpp	86;"	m	class:OperationHoursMeter	typeref:typename:OverflowCounter	file:
+hours_	Step-03/main.cpp	87;"	m	class:OperationHoursMeter	typeref:typename:OverflowCounter	file:
+hours_	Step-04/main.cpp	100;"	m	class:OperationHoursMeter	typeref:typename:OverflowCounter	file:
+hours_	Step-04x/main.cpp	119;"	m	class:OperationHoursMeter	typeref:typename:OverflowCounter	file:
+hours_	Step-04y/main.cpp	101;"	m	class:OperationHoursMeter	typeref:typename:OverflowCounter	file:
+hours_	Step-05/main.cpp	101;"	m	class:OperationHoursMeter	typeref:typename:OverflowCounter<24>	file:
+hours_	Step-05x/main.cpp	111;"	m	class:OperationHoursMeter	typeref:typename:OverflowCounter<24>	file:
+hours_	Step-05y/main.cpp	103;"	m	class:OperationHoursMeter	typeref:typename:OverflowCounter<24>	file:
+hours_	Step-06/main.cpp	99;"	m	class:OperationHoursMeter	typeref:typename:OverflowCounter	file:
+hours_	Step-07/main.cpp	101;"	m	class:OperationHoursMeter	typeref:typename:OverflowCounter<24>	file:
+incr	Step-00/main.cpp	22;"	f	class:OperationHoursMeter	typeref:typename:void	file:
+incr	Step-01/main.cpp	42;"	f	class:ChainableCounter	typeref:typename:void
+incr	Step-01/main.cpp	61;"	f	class:OperationHoursMeter	typeref:typename:void	file:
+incr	Step-02/main.cpp	115;"	f	class:OperationHoursMeter	typeref:typename:void
+incr	Step-02/main.cpp	49;"	f	class:LimitCounter	typeref:typename:void
+incr	Step-02/main.cpp	64;"	f	class:OverflowCounter	typeref:typename:void
+incr	Step-03/main.cpp	116;"	f	class:OperationHoursMeter	typeref:typename:void
+incr	Step-03/main.cpp	50;"	f	class:LimitCounter	typeref:typename:void
+incr	Step-04/main.cpp	129;"	f	class:OperationHoursMeter	typeref:typename:void
+incr	Step-04/main.cpp	41;"	f	class:BasicCounter	typeref:typename:void	file:
+incr	Step-04/main.cpp	61;"	f	class:LimitCounter	typeref:typename:void
+incr	Step-04x/main.cpp	146;"	f	class:OperationHoursMeter	typeref:typename:void
+incr	Step-04x/main.cpp	48;"	f	class:BasicCounter	typeref:typename:void	file:
+incr	Step-04x/main.cpp	72;"	f	class:LimitCounter	typeref:typename:void
+incr	Step-04y/main.cpp	130;"	f	class:OperationHoursMeter	typeref:typename:void
+incr	Step-04y/main.cpp	40;"	f	class:BasicCounter	typeref:typename:void	file:
+incr	Step-04y/main.cpp	59;"	f	class:LimitCounter	typeref:typename:void
+incr	Step-04y/main.cpp	78;"	f	class:OverflowCounter	typeref:typename:void
+incr	Step-05/main.cpp	130;"	f	class:OperationHoursMeter	typeref:typename:void
+incr	Step-05/main.cpp	43;"	f	class:BasicCounter	typeref:typename:void	file:
+incr	Step-05/main.cpp	61;"	f	class:LimitCounter	typeref:typename:void
+incr	Step-05x/main.cpp	140;"	f	class:OperationHoursMeter	typeref:typename:void
+incr	Step-05x/main.cpp	50;"	f	class:BasicCounter	typeref:typename:void	file:
+incr	Step-05x/main.cpp	69;"	f	class:LimitCounter	typeref:typename:void
+incr	Step-05y/main.cpp	132;"	f	class:OperationHoursMeter	typeref:typename:void
+incr	Step-05y/main.cpp	42;"	f	class:BasicCounter	typeref:typename:void	file:
+incr	Step-05y/main.cpp	59;"	f	class:LimitCounter	typeref:typename:void
+incr	Step-05y/main.cpp	80;"	f	class:OverflowCounter	typeref:typename:void
+incr	Step-06/main.cpp	128;"	f	class:OperationHoursMeter	typeref:typename:void
+incr	Step-06/main.cpp	41;"	f	class:BasicCounter	typeref:typename:void	file:
+incr	Step-06/main.cpp	60;"	f	class:LimitCounter	typeref:typename:void
+incr	Step-07/main.cpp	130;"	f	class:OperationHoursMeter	typeref:typename:void
+incr	Step-07/main.cpp	43;"	f	class:BasicCounter	typeref:typename:void	file:
+incr	Step-07/main.cpp	60;"	f	class:LimitCounter	typeref:typename:void
+incr	Step-08/main.cpp	58;"	f	class:FlexCounter	typeref:typename:bool
+incr	Step-09/main.cpp	60;"	f	class:FlexCounter	typeref:typename:bool
+limit_	Step-01/main.cpp	38;"	m	class:ChainableCounter	typeref:typename:unsigned const	file:
+limit_	Step-02/main.cpp	46;"	m	class:LimitCounter	typeref:typename:unsigned const	file:
+limit_	Step-03/main.cpp	47;"	m	class:LimitCounter	typeref:typename:unsigned const	file:
+limit_	Step-04/main.cpp	58;"	m	class:LimitCounter	typeref:typename:unsigned const	file:
+limit_	Step-04x/main.cpp	69;"	m	class:LimitCounter	typeref:typename:unsigned const	file:
+limit_	Step-04y/main.cpp	56;"	m	class:LimitCounter	typeref:typename:unsigned const	file:
+limit_	Step-04y/main.cpp	74;"	m	class:OverflowCounter	typeref:typename:unsigned const	file:
+limit_	Step-06/main.cpp	56;"	m	class:LimitCounter	typeref:typename:unsigned const	file:
+main	Step-00/main.cpp	47;"	f	typeref:typename:int
+main	Step-01/main.cpp	95;"	f	typeref:typename:int
+main	Step-02/main.cpp	121;"	f	typeref:typename:int
+main	Step-03/main.cpp	122;"	f	typeref:typename:int
+main	Step-04/main.cpp	135;"	f	typeref:typename:int
+main	Step-04x/main.cpp	153;"	f	typeref:typename:int
+main	Step-04y/main.cpp	136;"	f	typeref:typename:int
+main	Step-05/main.cpp	136;"	f	typeref:typename:int
+main	Step-05x/main.cpp	146;"	f	typeref:typename:int
+main	Step-05y/main.cpp	138;"	f	typeref:typename:int
+main	Step-06/main.cpp	134;"	f	typeref:typename:int
+main	Step-07/main.cpp	136;"	f	typeref:typename:int
+main	Step-08/main.cpp	111;"	f	typeref:typename:int
+main	Step-09/main.cpp	114;"	f	typeref:typename:int
+minutes_	Step-01/main.cpp	65;"	m	class:OperationHoursMeter	typeref:typename:ChainableCounter	file:
+minutes_	Step-02/main.cpp	87;"	m	class:OperationHoursMeter	typeref:typename:OverflowCounter	file:
+minutes_	Step-03/main.cpp	88;"	m	class:OperationHoursMeter	typeref:typename:OverflowCounter	file:
+minutes_	Step-04/main.cpp	101;"	m	class:OperationHoursMeter	typeref:typename:OverflowCounter	file:
+minutes_	Step-04x/main.cpp	120;"	m	class:OperationHoursMeter	typeref:typename:OverflowCounter	file:
+minutes_	Step-04y/main.cpp	102;"	m	class:OperationHoursMeter	typeref:typename:OverflowCounter	file:
+minutes_	Step-05/main.cpp	102;"	m	class:OperationHoursMeter	typeref:typename:OverflowCounter<60>	file:
+minutes_	Step-05x/main.cpp	112;"	m	class:OperationHoursMeter	typeref:typename:OverflowCounter<60>	file:
+minutes_	Step-05y/main.cpp	104;"	m	class:OperationHoursMeter	typeref:typename:OverflowCounter<60>	file:
+minutes_	Step-06/main.cpp	100;"	m	class:OperationHoursMeter	typeref:typename:OverflowCounter	file:
+minutes_	Step-07/main.cpp	102;"	m	class:OperationHoursMeter	typeref:typename:OverflowCounter<60>	file:
+next_	Step-01/main.cpp	39;"	m	class:ChainableCounter	typeref:typename:ChainableCounter * const	file:
+next_	Step-02/main.cpp	61;"	m	class:OverflowCounter	typeref:typename:LimitCounter &	file:
+next_	Step-03/main.cpp	64;"	m	class:OverflowCounter	typeref:typename:LimitCounter &	file:
+next_	Step-04/main.cpp	77;"	m	class:OverflowCounter	typeref:typename:I_Incrementable &	file:
+next_	Step-04x/main.cpp	93;"	m	class:OverflowCounter	typeref:typename:I_Incrementable &	file:
+next_	Step-04y/main.cpp	75;"	m	class:OverflowCounter	typeref:typename:I_Incrementable &	file:
+next_	Step-05/main.cpp	77;"	m	class:OverflowCounter	typeref:typename:I_Incrementable &	file:
+next_	Step-05x/main.cpp	85;"	m	class:OverflowCounter	typeref:typename:I_Incrementable &	file:
+next_	Step-05y/main.cpp	76;"	m	class:OverflowCounter	typeref:typename:I_Incrementable &	file:
+next_	Step-06/main.cpp	76;"	m	class:OverflowCounter	typeref:typename:std::function<void ()>	file:
+next_	Step-07/main.cpp	77;"	m	class:OverflowCounter	typeref:typename:std::function<void ()>	file:
+next_	Step-08/main.cpp	54;"	m	class:FlexCounter	typeref:typename:std::function<bool ()>	file:
+next_	Step-09/main.cpp	56;"	m	class:FlexCounter	typeref:typename:std::function<bool ()>	file:
+overflowed	Step-03/main.cpp	45;"	f	class:LimitCounter	typeref:typename:void	file:
+overflowed	Step-03/main.cpp	67;"	f	class:OverflowCounter	typeref:typename:void
+overflowed	Step-04/main.cpp	56;"	f	class:LimitCounter	typeref:typename:void	file:
+overflowed	Step-04/main.cpp	80;"	f	class:OverflowCounter	typeref:typename:void
+overflowed	Step-04x/main.cpp	66;"	f	class:LimitCounter	typeref:typename:void	file:
+overflowed	Step-04x/main.cpp	96;"	f	class:OverflowCounter	typeref:typename:void
+overflowed	Step-05/main.cpp	56;"	f	class:LimitCounter	typeref:typename:void	file:
+overflowed	Step-05/main.cpp	81;"	f	class:OverflowCounter	typeref:typename:void
+overflowed	Step-05x/main.cpp	65;"	f	class:LimitCounter	typeref:typename:void	file:
+overflowed	Step-05x/main.cpp	89;"	f	class:OverflowCounter	typeref:typename:void
+overflowed	Step-06/main.cpp	57;"	f	class:LimitCounter	typeref:typename:void	file:
+overflowed	Step-06/main.cpp	79;"	f	class:OverflowCounter	typeref:typename:void
+overflowed	Step-07/main.cpp	56;"	f	class:LimitCounter	typeref:typename:void	file:
+overflowed	Step-07/main.cpp	81;"	f	class:OverflowCounter	typeref:typename:void
+reset	Step-06/main.cpp	42;"	f	class:BasicCounter	typeref:typename:void	file:
+reset	Step-07/main.cpp	44;"	f	class:BasicCounter	typeref:typename:void	file:
+run	Step-00/Makefile	1;"	t
+run	Step-01/Makefile	1;"	t
+run	Step-02/Makefile	1;"	t
+run	Step-03/Makefile	1;"	t
+run	Step-04/Makefile	1;"	t
+run	Step-04x/Makefile	1;"	t
+run	Step-04y/Makefile	1;"	t
+run	Step-05/Makefile	1;"	t
+run	Step-05x/Makefile	1;"	t
+run	Step-05y/Makefile	1;"	t
+run	Step-06/Makefile	1;"	t
+run	Step-07/Makefile	1;"	t
+run	Step-08/Makefile	1;"	t
+run	Step-09/Makefile	1;"	t
+sec_10th_	Step-01/main.cpp	67;"	m	class:OperationHoursMeter	typeref:typename:ChainableCounter	file:
+sec_10th_	Step-02/main.cpp	89;"	m	class:OperationHoursMeter	typeref:typename:OverflowCounter	file:
+sec_10th_	Step-03/main.cpp	90;"	m	class:OperationHoursMeter	typeref:typename:OverflowCounter	file:
+sec_10th_	Step-04/main.cpp	103;"	m	class:OperationHoursMeter	typeref:typename:OverflowCounter	file:
+sec_10th_	Step-04x/main.cpp	122;"	m	class:OperationHoursMeter	typeref:typename:OverflowCounter	file:
+sec_10th_	Step-04y/main.cpp	104;"	m	class:OperationHoursMeter	typeref:typename:OverflowCounter	file:
+sec_10th_	Step-05/main.cpp	104;"	m	class:OperationHoursMeter	typeref:typename:OverflowCounter<10>	file:
+sec_10th_	Step-05x/main.cpp	114;"	m	class:OperationHoursMeter	typeref:typename:OverflowCounter<10>	file:
+sec_10th_	Step-05y/main.cpp	106;"	m	class:OperationHoursMeter	typeref:typename:OverflowCounter<10>	file:
+sec_10th_	Step-06/main.cpp	102;"	m	class:OperationHoursMeter	typeref:typename:OverflowCounter	file:
+sec_10th_	Step-07/main.cpp	104;"	m	class:OperationHoursMeter	typeref:typename:OverflowCounter<10>	file:
+seconds_	Step-01/main.cpp	66;"	m	class:OperationHoursMeter	typeref:typename:ChainableCounter	file:
+seconds_	Step-02/main.cpp	88;"	m	class:OperationHoursMeter	typeref:typename:OverflowCounter	file:
+seconds_	Step-03/main.cpp	89;"	m	class:OperationHoursMeter	typeref:typename:OverflowCounter	file:
+seconds_	Step-04/main.cpp	102;"	m	class:OperationHoursMeter	typeref:typename:OverflowCounter	file:
+seconds_	Step-04x/main.cpp	121;"	m	class:OperationHoursMeter	typeref:typename:OverflowCounter	file:
+seconds_	Step-04y/main.cpp	103;"	m	class:OperationHoursMeter	typeref:typename:OverflowCounter	file:
+seconds_	Step-05/main.cpp	103;"	m	class:OperationHoursMeter	typeref:typename:OverflowCounter<60>	file:
+seconds_	Step-05x/main.cpp	113;"	m	class:OperationHoursMeter	typeref:typename:OverflowCounter<60>	file:
+seconds_	Step-05y/main.cpp	105;"	m	class:OperationHoursMeter	typeref:typename:OverflowCounter<60>	file:
+seconds_	Step-06/main.cpp	101;"	m	class:OperationHoursMeter	typeref:typename:OverflowCounter	file:
+seconds_	Step-07/main.cpp	103;"	m	class:OperationHoursMeter	typeref:typename:OverflowCounter<60>	file:
+test_counter_chain	Step-08/main.cpp	75;"	f	typeref:typename:void
+test_counter_chain	Step-09/main.cpp	75;"	f	typeref:typename:void
+test_sticky_counter	Step-08/main.cpp	87;"	f	typeref:typename:void
+test_sticky_counter	Step-09/main.cpp	90;"	f	typeref:typename:void
+test_throwing_counter	Step-08/main.cpp	96;"	f	typeref:typename:void
+test_throwing_counter	Step-09/main.cpp	99;"	f	typeref:typename:void
+to_string	Step-00/main.cpp	30;"	f	class:OperationHoursMeter	typeref:typename:std::string
+to_string	Step-01/main.cpp	78;"	f	class:OperationHoursMeter	typeref:typename:std::string
+to_string	Step-02/main.cpp	100;"	f	class:OperationHoursMeter	typeref:typename:std::string
+to_string	Step-03/main.cpp	101;"	f	class:OperationHoursMeter	typeref:typename:std::string
+to_string	Step-04/main.cpp	114;"	f	class:OperationHoursMeter	typeref:typename:std::string
+to_string	Step-04x/main.cpp	130;"	f	class:OperationHoursMeter	typeref:typename:std::string
+to_string	Step-04y/main.cpp	115;"	f	class:OperationHoursMeter	typeref:typename:std::string
+to_string	Step-05/main.cpp	115;"	f	class:OperationHoursMeter	typeref:typename:std::string
+to_string	Step-05x/main.cpp	125;"	f	class:OperationHoursMeter	typeref:typename:std::string
+to_string	Step-05y/main.cpp	117;"	f	class:OperationHoursMeter	typeref:typename:std::string
+to_string	Step-06/main.cpp	113;"	f	class:OperationHoursMeter	typeref:typename:std::string
+to_string	Step-07/main.cpp	115;"	f	class:OperationHoursMeter	typeref:typename:std::string
+value_	Step-00/main.cpp	24;"	m	class:OperationHoursMeter	typeref:typename:unsigned long long	file:
+value_	Step-01/main.cpp	37;"	m	class:ChainableCounter	typeref:typename:unsigned	file:
+value_	Step-02/main.cpp	45;"	m	class:LimitCounter	typeref:typename:unsigned	file:
+value_	Step-03/main.cpp	46;"	m	class:LimitCounter	typeref:typename:unsigned	file:
+value_	Step-04/main.cpp	43;"	m	class:BasicCounter	typeref:typename:unsigned	file:
+value_	Step-04/main.cpp	57;"	m	class:LimitCounter	typeref:typename:unsigned	file:
+value_	Step-04/main.cpp	75;"	m	class:OverflowCounter	typeref:typename:unsigned	file:
+value_	Step-04x/main.cpp	51;"	m	class:BasicCounter	typeref:typename:unsigned	file:
+value_	Step-04y/main.cpp	42;"	m	class:BasicCounter	typeref:typename:unsigned	file:
+value_	Step-04y/main.cpp	55;"	m	class:LimitCounter	typeref:typename:unsigned	file:
+value_	Step-04y/main.cpp	73;"	m	class:OverflowCounter	typeref:typename:unsigned	file:
+value_	Step-05/main.cpp	45;"	m	class:BasicCounter	typeref:typename:unsigned	file:
+value_	Step-05/main.cpp	57;"	m	class:LimitCounter	typeref:typename:unsigned	file:
+value_	Step-05/main.cpp	75;"	m	class:OverflowCounter	typeref:typename:unsigned	file:
+value_	Step-05x/main.cpp	53;"	m	class:BasicCounter	typeref:typename:unsigned	file:
+value_	Step-05y/main.cpp	44;"	m	class:BasicCounter	typeref:typename:unsigned	file:
+value_	Step-05y/main.cpp	55;"	m	class:LimitCounter	typeref:typename:unsigned	file:
+value_	Step-05y/main.cpp	75;"	m	class:OverflowCounter	typeref:typename:unsigned	file:
+value_	Step-06/main.cpp	44;"	m	class:BasicCounter	typeref:typename:unsigned	file:
+value_	Step-07/main.cpp	46;"	m	class:BasicCounter	typeref:typename:unsigned	file:
+value_	Step-08/main.cpp	53;"	m	class:FlexCounter	typeref:typename:unsigned	file:
+value_type	Step-09/main.cpp	47;"	t	class:FlexCounter	typeref:typename:T	file:

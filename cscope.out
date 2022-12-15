@@ -1,0 +1,6071 @@
+cscope 15 $HOME/Downloads/CounDown -c               0000034721
+	@Step-00/main.cpp
+
+16 #include 
+	~<string
+>
+
+18 class 
+	cOperationHoursMeter
+ {
+
+19 
+	mpublic
+:
+
+20 
+OperationHoursMeter
+() =default;
+
+21 
+	mstd
+::
+string
+ 
+	$to_string
+() const;
+
+22 void 
+	$incr
+() { ++
+value_
+; }
+
+23 
+private
+:
+
+24 unsigned long long 
+value_
+{
+	}
+};
+
+27 #include 
+	~<iomanip
+>
+
+28 #include 
+	~<sstream
+>
+
+30 
+	gstd
+::
+string
+ 
+OperationHoursMeter
+::
+	$to_string
+() const {
+
+31 
+std
+::
+ostringstream
+ 
+os
+{};
+
+32 
+os
+.
+	`fill
+('0');
+
+33 
+os
+ << 
+value_
+ / (24*60*60*10)
+
+35 << 
+std
+::
+	`setw
+(2) << (
+value_
+ % (24*60*60*10) / (60*60*10))
+
+37 << 
+std
+::
+	`setw
+(2) << (
+value_
+ % (60*60*10) / (60*10))
+
+39 << 
+std
+::
+	`setw
+(2) << (
+value_
+ % (60*10) / 10)
+
+41 << 
+std
+::
+	`setw
+(1) << (
+value_
+ % 10);
+
+42 return 
+os
+.
+	`str
+();
+
+43 
+	}
+}
+
+45 #include 
+	~<iostream
+>
+
+47 int 
+	$main
+() {
+
+48 
+OperationHoursMeter
+ 
+test
+{};
+
+49 for (int 
+i
+ = 0; i < 2'222'222; ++i) {
+
+50 
+test
+.
+	`incr
+();
+
+51 
+std
+::
+cout
+ << '\r' << 
+test
+.
+	`to_string
+() << std::
+flush
+;
+
+53 
+std
+::
+cout
+ << std::
+endl
+;
+
+54 
+	}
+}
+
+	@Step-01/main.cpp
+
+18 #include 
+	~<climits
+>
+
+27 class 
+	cChainableCounter
+ {
+
+28 
+	mpublic
+:
+
+29 
+ChainableCounter
+() =default;
+
+30 
+	$ChainableCounter
+(unsigned 
+limit
+, 
+ChainableCounter
+* 
+next
+)
+
+31 : 
+limit_
+{
+limit
+}, 
+next_
+{
+next
+}
+	}
+next}
+
+33 unsigned 
+	$get_value
+() const { return 
+value_
+; 
+	}
+}
+
+34 unsigned 
+	$get_limit
+() const { return 
+limit_
+; 
+	}
+}
+
+35 void 
+incr
+();
+
+36 
+	gprivate
+:
+
+37 unsigned 
+value_
+ = 0;
+
+38 unsigned const 
+	glimit_
+ = 
+UINT_MAX
+;
+
+39 
+ChainableCounter
+* const 
+	gnext_
+ = 
+nullptr
+;
+
+42 void 
+	gChainableCounter
+::
+	$incr
+() {
+
+43 if (++
+value_
+ == 
+limit_
+) {
+
+44 
+value_
+ = 0;
+
+45 if (
+next_
+) next_->
+	`incr
+();
+
+47 
+	}
+}
+
+53 #include 
+	~<iomanip
+>
+
+54 #include 
+	~<sstream
+>
+
+55 #include 
+	~<string
+>
+
+57 class 
+	cOperationHoursMeter
+ {
+
+58 
+	mpublic
+:
+
+59 
+OperationHoursMeter
+();
+
+60 
+	mstd
+::
+string
+ 
+	$to_string
+() const;
+
+61 void 
+	$incr
+() { 
+sec_10th_
+.
+	`incr
+(); }
+
+62 
+private
+:
+
+63 
+ChainableCounter
+ 
+days_
+;
+
+64 
+ChainableCounter
+ 
+hours_
+;
+
+65 
+ChainableCounter
+ 
+minutes_
+;
+
+66 
+ChainableCounter
+ 
+seconds_
+;
+
+67 
+ChainableCounter
+ 
+sec_10th_
+;
+
+68 
+	}
+};
+
+70 
+	gOperationHoursMeter
+::
+	$OperationHoursMeter
+()
+
+71 : 
+days_
+{
+	}
+}
+
+72 , 
+	ghours_
+{24, &
+	gdays_
+}
+
+73 , 
+	gminutes_
+{60, &
+	ghours_
+}
+
+74 , 
+	gseconds_
+{60, &
+	gminutes_
+}
+
+75 , 
+	gsec_10th_
+{10, &
+	gseconds_
+}
+
+78 
+	gstd
+::
+string
+ 
+OperationHoursMeter
+::
+	$to_string
+() const {
+
+79 
+std
+::
+ostringstream
+ 
+os
+{};
+
+80 
+os
+.
+	`fill
+('0');
+
+81 
+os
+ << 
+days_
+.
+	`get_value
+()
+
+83 << 
+std
+::
+	`setw
+(2) << 
+hours_
+.
+	`get_value
+()
+
+85 << 
+std
+::
+	`setw
+(2) << 
+minutes_
+.
+	`get_value
+()
+
+87 << 
+std
+::
+	`setw
+(2) << 
+seconds_
+.
+	`get_value
+()
+
+89 << 
+std
+::
+	`setw
+(1) << 
+sec_10th_
+.
+	`get_value
+();
+
+90 return 
+os
+.
+	`str
+();
+
+91 
+	}
+}
+
+93 #include 
+	~<iostream
+>
+
+95 int 
+	$main
+() {
+
+96 
+OperationHoursMeter
+ 
+test
+{};
+
+97 for (int 
+i
+ = 0; i < 2'222'222; ++i) {
+
+98 
+test
+.
+	`incr
+();
+
+99 
+std
+::
+cout
+ << '\r' << 
+test
+.
+	`to_string
+() << std::
+flush
+;
+
+101 
+std
+::
+cout
+ << std::
+endl
+;
+
+102 
+	}
+}
+
+	@Step-02/main.cpp
+
+33 #include 
+	~<climits
+>
+
+35 class 
+	cLimitCounter
+ {
+
+36 
+	mpublic
+:
+
+37 
+LimitCounter
+() =default;
+
+38 
+	$LimitCounter
+(unsigned 
+limit
+)
+
+39 : 
+limit_
+{
+limit
+}
+
+40 {
+	}
+}
+
+41 unsigned 
+	$get_value
+() const { return 
+value_
+; 
+	}
+}
+
+42 unsigned 
+	$get_limit
+() const { return 
+limit_
+; 
+	}
+}
+
+43 
+virtual
+ void 
+incr
+();
+
+44 
+	gprivate
+:
+
+45 unsigned 
+value_
+ = 0;
+
+46 unsigned const 
+	glimit_
+ = 
+UINT_MAX
+;
+
+49 void 
+	gLimitCounter
+::
+	$incr
+() {
+
+50 if (++
+value_
+ == 
+limit_
+)
+
+51 
+value_
+ = 0;
+
+52 
+	}
+}
+
+54 class 
+	cOverflowCounter
+ : 
+public
+ 
+LimitCounter
+ {
+
+55 
+public
+:
+
+56 
+	$OverflowCounter
+(unsigned 
+limit
+, 
+LimitCounter
+& 
+next
+)
+
+57 : 
+LimitCounter
+{
+limit
+}, 
+next_
+{
+next
+}
+	}
+next}
+
+59 void 
+	$incr
+() 
+override
+;
+
+60 
+private
+:
+
+61 
+LimitCounter
+& 
+next_
+;
+
+62 
+	}
+};
+
+64 void 
+	gOverflowCounter
+::
+	$incr
+() {
+
+65 
+LimitCounter
+::
+	`incr
+();
+
+66 if (
+	`get_value
+() == 0)
+
+67 
+next_
+.
+	`incr
+();
+
+68 
+	}
+}
+
+74 #include 
+	~<iomanip
+>
+
+75 #include 
+	~<iostream
+>
+
+76 #include 
+	~<sstream
+>
+
+77 #include 
+	~<string
+>
+
+79 class 
+	cOperationHoursMeter
+ {
+
+80 
+	mpublic
+:
+
+81 
+OperationHoursMeter
+();
+
+82 
+	mstd
+::
+string
+ 
+	$to_string
+() const;
+
+83 void 
+	`incr
+();
+
+84 
+private
+:
+
+85 
+LimitCounter
+ 
+days_
+;
+
+86 
+OverflowCounter
+ 
+hours_
+;
+
+87 
+OverflowCounter
+ 
+minutes_
+;
+
+88 
+OverflowCounter
+ 
+seconds_
+;
+
+89 
+OverflowCounter
+ 
+sec_10th_
+;
+
+92 
+OperationHoursMeter
+::
+	$OperationHoursMeter
+()
+
+93 : 
+days_
+{
+	}
+}
+
+94 , 
+	ghours_
+{24, 
+	gdays_
+}
+
+95 , 
+	gminutes_
+{60, 
+	ghours_
+}
+
+96 , 
+	gseconds_
+{60, 
+	gminutes_
+}
+
+97 , 
+	gsec_10th_
+{10, 
+	gseconds_
+}
+
+100 
+	gstd
+::
+string
+ 
+OperationHoursMeter
+::
+	$to_string
+() const {
+
+101 
+std
+::
+ostringstream
+ 
+os
+{};
+
+102 
+os
+.
+	`fill
+('0');
+
+103 
+os
+ << 
+days_
+.
+	`get_value
+()
+
+105 << 
+std
+::
+	`setw
+(2) << 
+hours_
+.
+	`get_value
+()
+
+107 << 
+std
+::
+	`setw
+(2) << 
+minutes_
+.
+	`get_value
+()
+
+109 << 
+std
+::
+	`setw
+(2) << 
+seconds_
+.
+	`get_value
+()
+
+111 << 
+std
+::
+	`setw
+(1) << 
+sec_10th_
+.
+	`get_value
+();
+
+112 return 
+os
+.
+	`str
+();
+
+113 
+	}
+}
+
+115 void 
+	gOperationHoursMeter
+::
+	$incr
+() {
+
+116 
+sec_10th_
+.
+	`incr
+();
+
+117 
+	}
+}
+
+119 #include 
+	~<iostream
+>
+
+121 int 
+	$main
+() {
+
+122 
+OperationHoursMeter
+ 
+test
+{};
+
+123 for (int 
+i
+ = 0; i < 2'222'222; ++i) {
+
+124 
+test
+.
+	`incr
+();
+
+125 
+std
+::
+cout
+ << '\r' << 
+test
+.
+	`to_string
+() << std::
+flush
+;
+
+127 
+std
+::
+cout
+ << std::
+endl
+;
+
+128 
+	}
+}
+
+	@Step-03/main.cpp
+
+33 #include 
+	~<climits
+>
+
+35 class 
+	cLimitCounter
+ {
+
+36 
+	mpublic
+:
+
+37 
+LimitCounter
+() =default;
+
+38 
+	$LimitCounter
+(unsigned 
+limit
+)
+
+39 : 
+limit_
+{
+limit
+}
+
+40 {
+	}
+}
+
+41 unsigned 
+	$get_value
+() const { return 
+value_
+; 
+	}
+}
+
+42 unsigned 
+	$get_limit
+() const { return 
+limit_
+; 
+	}
+}
+
+43 void 
+incr
+();
+
+44 
+	gprivate
+:
+
+45 
+virtual
+ void 
+	$overflowed
+() { 
+	}
+}
+
+46 unsigned 
+value_
+ = 0;
+
+47 unsigned const 
+	glimit_
+ = 
+UINT_MAX
+;
+
+50 void 
+	gLimitCounter
+::
+	$incr
+() {
+
+51 if (++
+value_
+ == 
+limit_
+) {
+
+52 
+value_
+ = 0;
+
+53 
+	`overflowed
+();
+
+55 
+	}
+}
+
+57 class 
+	cOverflowCounter
+ : 
+public
+ 
+LimitCounter
+ {
+
+58 
+public
+:
+
+59 
+	$OverflowCounter
+(unsigned 
+limit
+, 
+LimitCounter
+& 
+next
+)
+
+60 : 
+LimitCounter
+{
+limit
+}, 
+next_
+{
+next
+}
+	}
+next}
+
+62 
+	gprivate
+:
+
+63 void 
+	$overflowed
+() 
+override
+;
+
+64 
+LimitCounter
+& 
+next_
+;
+
+65 
+	}
+};
+
+67 void 
+	gOverflowCounter
+::
+	$overflowed
+() {
+
+68 
+next_
+.
+	`incr
+();
+
+69 
+	}
+}
+
+75 #include 
+	~<iomanip
+>
+
+76 #include 
+	~<iostream
+>
+
+77 #include 
+	~<sstream
+>
+
+78 #include 
+	~<string
+>
+
+80 class 
+	cOperationHoursMeter
+ {
+
+81 
+	mpublic
+:
+
+82 
+OperationHoursMeter
+();
+
+83 
+	mstd
+::
+string
+ 
+	$to_string
+() const;
+
+84 void 
+	`incr
+();
+
+85 
+private
+:
+
+86 
+LimitCounter
+ 
+days_
+;
+
+87 
+OverflowCounter
+ 
+hours_
+;
+
+88 
+OverflowCounter
+ 
+minutes_
+;
+
+89 
+OverflowCounter
+ 
+seconds_
+;
+
+90 
+OverflowCounter
+ 
+sec_10th_
+;
+
+93 
+OperationHoursMeter
+::
+	$OperationHoursMeter
+()
+
+94 : 
+days_
+{
+	}
+}
+
+95 , 
+	ghours_
+{24, 
+	gdays_
+}
+
+96 , 
+	gminutes_
+{60, 
+	ghours_
+}
+
+97 , 
+	gseconds_
+{60, 
+	gminutes_
+}
+
+98 , 
+	gsec_10th_
+{10, 
+	gseconds_
+}
+
+101 
+	gstd
+::
+string
+ 
+OperationHoursMeter
+::
+	$to_string
+() const {
+
+102 
+std
+::
+ostringstream
+ 
+os
+{};
+
+103 
+os
+.
+	`fill
+('0');
+
+104 
+os
+ << 
+days_
+.
+	`get_value
+()
+
+106 << 
+std
+::
+	`setw
+(2) << 
+hours_
+.
+	`get_value
+()
+
+108 << 
+std
+::
+	`setw
+(2) << 
+minutes_
+.
+	`get_value
+()
+
+110 << 
+std
+::
+	`setw
+(2) << 
+seconds_
+.
+	`get_value
+()
+
+112 << 
+std
+::
+	`setw
+(1) << 
+sec_10th_
+.
+	`get_value
+();
+
+113 return 
+os
+.
+	`str
+();
+
+114 
+	}
+}
+
+116 void 
+	gOperationHoursMeter
+::
+	$incr
+() {
+
+117 
+sec_10th_
+.
+	`incr
+();
+
+118 
+	}
+}
+
+120 #include 
+	~<iostream
+>
+
+122 int 
+	$main
+() {
+
+123 
+OperationHoursMeter
+ 
+test
+{};
+
+124 for (int 
+i
+ = 0; i < 2'222'222; ++i) {
+
+125 
+test
+.
+	`incr
+();
+
+126 
+std
+::
+cout
+ << '\r' << 
+test
+.
+	`to_string
+() << std::
+flush
+;
+
+128 
+std
+::
+cout
+ << std::
+endl
+;
+
+129 
+	}
+}
+
+	@Step-04/main.cpp
+
+30 #include 
+	~<climits
+>
+
+32 class 
+	cI_Incrementable
+ {
+
+33 
+	mpublic
+:
+
+34 
+virtual
+ ~
+I_Incrementable
+() =default;
+
+35 
+virtual
+ void 
+incr
+() =0;
+
+38 class 
+	cBasicCounter
+ : 
+public
+ 
+I_Incrementable
+ {
+
+39 
+public
+:
+
+40 unsigned 
+	$get_value
+() const { return 
+value_
+; }
+
+41 void 
+	$incr
+() 
+override
+ { ++
+value_
+; 
+	}
+}
+
+42 
+	gprivate
+:
+
+43 unsigned 
+value_
+ = 0;
+
+46 class 
+	cLimitCounter
+ : 
+public
+ 
+I_Incrementable
+ {
+
+47 
+public
+:
+
+48 
+LimitCounter
+() =default;
+
+49 unsigned 
+	$get_value
+() const { return 
+value_
+; }
+
+50 
+	$LimitCounter
+(unsigned 
+limit
+)
+
+51 : 
+limit_
+{
+limit
+}
+	}
+limit}
+
+53 unsigned 
+	$get_limit
+() const { return 
+limit_
+; 
+	}
+}
+
+54 void 
+	$incr
+() 
+override
+;
+
+55 
+private
+:
+
+56 
+virtual
+ void 
+	$overflowed
+() { 
+	}
+}
+
+57 unsigned 
+value_
+ = 0;
+
+58 unsigned const 
+	glimit_
+ = 
+UINT_MAX
+;
+
+61 void 
+	gLimitCounter
+::
+	$incr
+() {
+
+62 if (++
+value_
+ == 
+limit_
+) {
+
+63 
+value_
+ = 0;
+
+64 
+	`overflowed
+();
+
+66 
+	}
+}
+
+68 class 
+	cOverflowCounter
+ : 
+public
+ 
+LimitCounter
+ {
+
+70 
+public
+:
+
+71 
+	$OverflowCounter
+(unsigned 
+limit
+, 
+I_Incrementable
+& 
+next
+)
+
+72 : 
+LimitCounter
+{
+limit
+}, 
+next_
+{
+next
+}
+	}
+next}
+
+74 
+	gprivate
+:
+
+75 unsigned 
+value_
+ = 0;
+
+76 void 
+	$overflowed
+() 
+override
+;
+
+77 
+I_Incrementable
+& 
+next_
+;
+
+78 
+	}
+};
+
+80 void 
+	gOverflowCounter
+::
+	$overflowed
+() {
+
+81 
+next_
+.
+	`incr
+();
+
+82 
+	}
+}
+
+88 #include 
+	~<iomanip
+>
+
+89 #include 
+	~<iostream
+>
+
+90 #include 
+	~<sstream
+>
+
+91 #include 
+	~<string
+>
+
+93 class 
+	cOperationHoursMeter
+ {
+
+94 
+	mpublic
+:
+
+95 
+OperationHoursMeter
+();
+
+96 
+	mstd
+::
+string
+ 
+	$to_string
+() const;
+
+97 void 
+	`incr
+();
+
+98 
+private
+:
+
+99 
+BasicCounter
+ 
+days_
+;
+
+100 
+OverflowCounter
+ 
+hours_
+;
+
+101 
+OverflowCounter
+ 
+minutes_
+;
+
+102 
+OverflowCounter
+ 
+seconds_
+;
+
+103 
+OverflowCounter
+ 
+sec_10th_
+;
+
+106 
+OperationHoursMeter
+::
+	$OperationHoursMeter
+()
+
+107 : 
+days_
+{
+	}
+}
+
+108 , 
+	ghours_
+{24, 
+	gdays_
+}
+
+109 , 
+	gminutes_
+{60, 
+	ghours_
+}
+
+110 , 
+	gseconds_
+{60, 
+	gminutes_
+}
+
+111 , 
+	gsec_10th_
+{10, 
+	gseconds_
+}
+
+114 
+	gstd
+::
+string
+ 
+OperationHoursMeter
+::
+	$to_string
+() const {
+
+115 
+std
+::
+ostringstream
+ 
+os
+{};
+
+116 
+os
+.
+	`fill
+('0');
+
+117 
+os
+ << 
+days_
+.
+	`get_value
+()
+
+119 << 
+std
+::
+	`setw
+(2) << 
+hours_
+.
+	`get_value
+()
+
+121 << 
+std
+::
+	`setw
+(2) << 
+minutes_
+.
+	`get_value
+()
+
+123 << 
+std
+::
+	`setw
+(2) << 
+seconds_
+.
+	`get_value
+()
+
+125 << 
+std
+::
+	`setw
+(1) << 
+sec_10th_
+.
+	`get_value
+();
+
+126 return 
+os
+.
+	`str
+();
+
+127 
+	}
+}
+
+129 void 
+	gOperationHoursMeter
+::
+	$incr
+() {
+
+130 
+sec_10th_
+.
+	`incr
+();
+
+131 
+	}
+}
+
+133 #include 
+	~<iostream
+>
+
+135 int 
+	$main
+() {
+
+136 
+OperationHoursMeter
+ 
+test
+{};
+
+137 for (int 
+i
+ = 0; i < 2'222'222; ++i) {
+
+138 
+test
+.
+	`incr
+();
+
+139 
+std
+::
+cout
+ << '\r' << 
+test
+.
+	`to_string
+() << std::
+flush
+;
+
+141 
+std
+::
+cout
+ << std::
+endl
+;
+
+142 
+	}
+}
+
+	@Step-04x/main.cpp
+
+35 #include 
+	~<climits
+>
+
+37 class 
+	cI_Incrementable
+
+
+39 
+	mpublic
+:
+
+40 
+virtual
+ ~
+I_Incrementable
+() = default;
+
+41 
+virtual
+ void 
+incr
+() = 0;
+
+44 class 
+	cBasicCounter
+ : 
+public
+ 
+I_Incrementable
+
+
+46 
+public
+:
+
+47 unsigned 
+	$get_value
+() const { return 
+value_
+; }
+
+48 void 
+	$incr
+() 
+override
+ { ++
+value_
+; 
+	}
+}
+
+50 
+	gprotected
+:
+
+51 unsigned 
+value_
+ = 0;
+
+54 class 
+	cLimitCounter
+ : 
+public
+ 
+BasicCounter
+
+
+56 
+public
+:
+
+57 
+LimitCounter
+() = default;
+
+58 
+	$LimitCounter
+(unsigned 
+limit
+)
+
+59 : 
+limit_
+{
+limit
+}
+
+61 
+	}
+}
+
+62 unsigned 
+	$get_limit
+() const { return 
+limit_
+; 
+	}
+}
+
+63 void 
+	$incr
+() 
+override
+;
+
+65 
+private
+:
+
+66 
+virtual
+ void 
+	$overflowed
+()
+
+68 
+	}
+}
+
+69 unsigned const 
+limit_
+ = 
+UINT_MAX
+;
+
+72 void 
+	gLimitCounter
+::
+	$incr
+()
+
+74 
+BasicCounter
+::
+	`incr
+();
+
+75 if (
+	`get_value
+() >= 
+limit_
+)
+
+77 
+value_
+ = 0;
+
+78 
+	`overflowed
+();
+
+80 
+	}
+}
+
+82 class 
+	cOverflowCounter
+ : 
+public
+ 
+LimitCounter
+
+
+85 
+public
+:
+
+86 
+	$OverflowCounter
+(unsigned 
+limit
+, 
+I_Incrementable
+ &
+next
+)
+
+87 : 
+LimitCounter
+{
+limit
+}, 
+next_
+{
+next
+}
+	}
+next}
+
+91 
+	gprivate
+:
+
+92 void 
+	$overflowed
+() 
+override
+;
+
+93 
+I_Incrementable
+ &
+next_
+;
+
+94 
+	}
+};
+
+96 void 
+	gOverflowCounter
+::
+	$overflowed
+()
+
+98 
+next_
+.
+	`incr
+();
+
+99 
+	}
+}
+
+105 #include 
+	~<iomanip
+>
+
+106 #include 
+	~<iostream
+>
+
+107 #include 
+	~<sstream
+>
+
+108 #include 
+	~<string
+>
+
+110 class 
+	cOperationHoursMeter
+
+
+112 
+	mpublic
+:
+
+113 
+OperationHoursMeter
+();
+
+114 
+	mstd
+::
+string
+ 
+	$to_string
+() const;
+
+115 void 
+	`incr
+();
+
+117 
+private
+:
+
+118 
+BasicCounter
+ 
+days_
+;
+
+119 
+OverflowCounter
+ 
+hours_
+;
+
+120 
+OverflowCounter
+ 
+minutes_
+;
+
+121 
+OverflowCounter
+ 
+seconds_
+;
+
+122 
+OverflowCounter
+ 
+sec_10th_
+;
+
+125 
+OperationHoursMeter
+::
+	$OperationHoursMeter
+()
+
+126 : 
+days_
+{
+	}
+}, 
+	ghours_
+{24, 
+	gdays_
+}, 
+	gminutes_
+{60, hours_}, 
+	gseconds_
+{60, minutes_}, 
+	gsec_10th_
+{10, seconds_}
+
+130 
+	gstd
+::
+string
+ 
+OperationHoursMeter
+::
+	$to_string
+() const
+
+132 
+std
+::
+ostringstream
+ 
+os
+{};
+
+133 
+os
+.
+	`fill
+('0');
+
+134 
+os
+ << 
+days_
+.
+	`get_value
+()
+
+136 << 
+std
+::
+	`setw
+(2) << 
+hours_
+.
+	`get_value
+()
+
+138 << 
+std
+::
+	`setw
+(2) << 
+minutes_
+.
+	`get_value
+()
+
+140 << 
+std
+::
+	`setw
+(2) << 
+seconds_
+.
+	`get_value
+()
+
+142 << 
+std
+::
+	`setw
+(1) << 
+sec_10th_
+.
+	`get_value
+();
+
+143 return 
+os
+.
+	`str
+();
+
+144 
+	}
+}
+
+146 void 
+	gOperationHoursMeter
+::
+	$incr
+()
+
+148 
+sec_10th_
+.
+	`incr
+();
+
+149 
+	}
+}
+
+151 #include 
+	~<iostream
+>
+
+153 int 
+	$main
+()
+
+155 
+OperationHoursMeter
+ 
+test
+{};
+
+156 for (int 
+i
+ = 0; i < 2'222'222; ++i)
+
+158 
+test
+.
+	`incr
+();
+
+159 
+std
+::
+cout
+ << '\r' << 
+test
+.
+	`to_string
+() << std::
+flush
+;
+
+161 
+std
+::
+cout
+ << std::
+endl
+;
+
+162 
+	}
+}
+
+	@Step-04y/main.cpp
+
+29 #include 
+	~<climits
+>
+
+31 class 
+	cI_Incrementable
+ {
+
+32 
+	mpublic
+:
+
+33 
+virtual
+ ~
+I_Incrementable
+() =default;
+
+34 
+virtual
+ void 
+incr
+() =0;
+
+37 class 
+	cBasicCounter
+ : 
+public
+ 
+I_Incrementable
+ {
+
+38 
+public
+:
+
+39 unsigned 
+	$get_value
+() const { return 
+value_
+; }
+
+40 void 
+	$incr
+() 
+override
+ { ++
+value_
+; 
+	}
+}
+
+41 
+	gprivate
+:
+
+42 unsigned 
+value_
+ = 0;
+
+45 class 
+	cLimitCounter
+ : 
+public
+ 
+I_Incrementable
+ {
+
+46 
+public
+:
+
+47 
+LimitCounter
+() =default;
+
+48 unsigned 
+	$get_value
+() const { return 
+value_
+; }
+
+49 
+	$LimitCounter
+(unsigned 
+limit
+)
+
+50 : 
+limit_
+{
+limit
+}
+	}
+limit}
+
+52 unsigned 
+	$get_limit
+() const { return 
+limit_
+; 
+	}
+}
+
+53 void 
+	$incr
+() 
+override
+;
+
+54 
+private
+:
+
+55 unsigned 
+value_
+ = 0;
+
+56 unsigned const 
+limit_
+ = 
+UINT_MAX
+;
+
+57 
+	}
+};
+
+59 void 
+	gLimitCounter
+::
+	$incr
+() {
+
+60 if (++
+value_
+ == 
+limit_
+) {
+
+61 
+value_
+ = 0;
+
+63 
+	}
+}
+
+65 class 
+	cOverflowCounter
+ : 
+public
+ 
+I_Incrementable
+ {
+
+66 
+public
+:
+
+67 
+	$OverflowCounter
+(unsigned 
+limit
+, 
+I_Incrementable
+& 
+next
+)
+
+68 : 
+limit_
+{
+limit
+}, 
+next_
+{
+next
+}
+	}
+next}
+
+70 unsigned 
+	$get_value
+() const { return 
+value_
+; 
+	}
+}
+
+71 
+virtual
+ void 
+incr
+();
+
+72 
+	gprivate
+:
+
+73 unsigned 
+value_
+ = 0;
+
+74 unsigned const 
+	glimit_
+ = 
+UINT_MAX
+;
+
+75 
+	gI_Incrementable
+& 
+	gnext_
+;
+
+78 void 
+	gOverflowCounter
+::
+	$incr
+() {
+
+79 if (++
+value_
+ == 
+limit_
+) {
+
+80 
+value_
+ = 0;
+
+81 
+next_
+.
+	`incr
+();
+
+83 
+	}
+}
+
+89 #include 
+	~<iomanip
+>
+
+90 #include 
+	~<iostream
+>
+
+91 #include 
+	~<sstream
+>
+
+92 #include 
+	~<string
+>
+
+94 class 
+	cOperationHoursMeter
+ {
+
+95 
+	mpublic
+:
+
+96 
+OperationHoursMeter
+();
+
+97 
+	mstd
+::
+string
+ 
+	$to_string
+() const;
+
+98 void 
+	`incr
+();
+
+99 
+private
+:
+
+100 
+BasicCounter
+ 
+days_
+;
+
+101 
+OverflowCounter
+ 
+hours_
+;
+
+102 
+OverflowCounter
+ 
+minutes_
+;
+
+103 
+OverflowCounter
+ 
+seconds_
+;
+
+104 
+OverflowCounter
+ 
+sec_10th_
+;
+
+107 
+OperationHoursMeter
+::
+	$OperationHoursMeter
+()
+
+108 : 
+days_
+{
+	}
+}
+
+109 , 
+	ghours_
+{24, 
+	gdays_
+}
+
+110 , 
+	gminutes_
+{60, 
+	ghours_
+}
+
+111 , 
+	gseconds_
+{60, 
+	gminutes_
+}
+
+112 , 
+	gsec_10th_
+{10, 
+	gseconds_
+}
+
+115 
+	gstd
+::
+string
+ 
+OperationHoursMeter
+::
+	$to_string
+() const {
+
+116 
+std
+::
+ostringstream
+ 
+os
+{};
+
+117 
+os
+.
+	`fill
+('0');
+
+118 
+os
+ << 
+days_
+.
+	`get_value
+()
+
+120 << 
+std
+::
+	`setw
+(2) << 
+hours_
+.
+	`get_value
+()
+
+122 << 
+std
+::
+	`setw
+(2) << 
+minutes_
+.
+	`get_value
+()
+
+124 << 
+std
+::
+	`setw
+(2) << 
+seconds_
+.
+	`get_value
+()
+
+126 << 
+std
+::
+	`setw
+(1) << 
+sec_10th_
+.
+	`get_value
+();
+
+127 return 
+os
+.
+	`str
+();
+
+128 
+	}
+}
+
+130 void 
+	gOperationHoursMeter
+::
+	$incr
+() {
+
+131 
+sec_10th_
+.
+	`incr
+();
+
+132 
+	}
+}
+
+134 #include 
+	~<iostream
+>
+
+136 int 
+	$main
+() {
+
+137 
+OperationHoursMeter
+ 
+test
+{};
+
+138 for (int 
+i
+ = 0; i < 2'222'222; ++i) {
+
+139 
+test
+.
+	`incr
+();
+
+140 
+std
+::
+cout
+ << '\r' << 
+test
+.
+	`to_string
+() << std::
+flush
+;
+
+142 
+std
+::
+cout
+ << std::
+endl
+;
+
+143 
+	}
+}
+
+	@Step-05/main.cpp
+
+32 #include 
+	~<climits
+>
+
+34 class 
+	cI_Incrementable
+ {
+
+35 
+	mpublic
+:
+
+36 
+virtual
+ ~
+I_Incrementable
+() =default;
+
+37 
+virtual
+ void 
+incr
+() =0;
+
+40 class 
+	cBasicCounter
+ : 
+public
+ 
+I_Incrementable
+ {
+
+41 
+public
+:
+
+42 unsigned 
+	$get_value
+() const { return 
+value_
+; }
+
+43 void 
+	$incr
+() 
+override
+ { ++
+value_
+; 
+	}
+}
+
+44 
+	gprivate
+:
+
+45 unsigned 
+value_
+ = 0;
+
+48 
+	gtemplate
+<unsigned 
+	glimit_
+ = 
+UINT_MAX
+>
+
+49 class 
+	cLimitCounter
+ : 
+public
+ 
+I_Incrementable
+ {
+
+50 
+public
+:
+
+51 
+LimitCounter
+() =default;
+
+52 unsigned 
+	$get_value
+() const { return 
+value_
+; }
+
+53 unsigned 
+constexpr
+ 
+	$get_limit
+() { return 
+limit_
+; 
+	}
+}
+
+54 void 
+	$incr
+() 
+override
+;
+
+55 
+private
+:
+
+56 
+virtual
+ void 
+	$overflowed
+() { 
+	}
+}
+
+57 unsigned 
+value_
+ = 0;
+
+60 
+	gtemplate
+<unsigned 
+	glimit_
+>
+
+61 void 
+	gLimitCounter
+<
+	glimit_
+>::
+	$incr
+() {
+
+62 if (++
+value_
+ == 
+limit_
+) {
+
+63 
+value_
+ = 0;
+
+64 
+	`overflowed
+();
+
+66 
+	}
+}
+
+68 
+	gtemplate
+<unsigned 
+	glimit_
+>
+
+69 
+class
+ 
+	gOverflowCounter
+ : 
+public
+ 
+LimitCounter
+<
+limit_
+> {
+
+70 
+public
+:
+
+71 
+OverflowCounter
+(
+I_Incrementable
+& 
+next
+)
+
+72 : 
+LimitCounter
+<
+limit_
+>{}, 
+	gnext_
+{
+	gnext
+}
+
+74 
+	gprivate
+:
+
+75 unsigned 
+value_
+ = 0;
+
+76 void 
+overflowed
+() 
+	goverride
+;
+
+77 
+	gI_Incrementable
+& 
+	gnext_
+;
+
+80 
+	gtemplate
+<unsigned 
+	glimit_
+>
+
+81 void 
+	gOverflowCounter
+<
+	glimit_
+>::
+	$overflowed
+() {
+
+82 
+next_
+.
+	`incr
+();
+
+83 
+	}
+}
+
+89 #include 
+	~<iomanip
+>
+
+90 #include 
+	~<iostream
+>
+
+91 #include 
+	~<sstream
+>
+
+92 #include 
+	~<string
+>
+
+94 class 
+	cOperationHoursMeter
+ {
+
+95 
+	mpublic
+:
+
+96 
+OperationHoursMeter
+();
+
+97 
+	mstd
+::
+string
+ 
+	$to_string
+() const;
+
+98 void 
+	`incr
+();
+
+99 
+private
+:
+
+100 
+BasicCounter
+ 
+days_
+;
+
+101 
+OverflowCounter
+<24> 
+hours_
+;
+
+102 
+OverflowCounter
+<60> 
+minutes_
+;
+
+103 
+OverflowCounter
+<60> 
+seconds_
+;
+
+104 
+OverflowCounter
+<10> 
+sec_10th_
+;
+
+107 
+OperationHoursMeter
+::
+	$OperationHoursMeter
+()
+
+108 : 
+days_
+{
+	}
+}
+
+109 , 
+	ghours_
+{
+	gdays_
+}
+
+110 , 
+	gminutes_
+{
+	ghours_
+}
+
+111 , 
+	gseconds_
+{
+	gminutes_
+}
+
+112 , 
+	gsec_10th_
+{
+	gseconds_
+}
+
+115 
+	gstd
+::
+string
+ 
+OperationHoursMeter
+::
+	$to_string
+() const {
+
+116 
+std
+::
+ostringstream
+ 
+os
+{};
+
+117 
+os
+.
+	`fill
+('0');
+
+118 
+os
+ << 
+days_
+.
+	`get_value
+()
+
+120 << 
+std
+::
+	`setw
+(2) << 
+hours_
+.
+	`get_value
+()
+
+122 << 
+std
+::
+	`setw
+(2) << 
+minutes_
+.
+	`get_value
+()
+
+124 << 
+std
+::
+	`setw
+(2) << 
+seconds_
+.
+	`get_value
+()
+
+126 << 
+std
+::
+	`setw
+(1) << 
+sec_10th_
+.
+	`get_value
+();
+
+127 return 
+os
+.
+	`str
+();
+
+128 
+	}
+}
+
+130 void 
+	gOperationHoursMeter
+::
+	$incr
+() {
+
+131 
+sec_10th_
+.
+	`incr
+();
+
+132 
+	}
+}
+
+134 #include 
+	~<iostream
+>
+
+136 int 
+	$main
+() {
+
+137 
+OperationHoursMeter
+ 
+test
+{};
+
+138 for (int 
+i
+ = 0; i < 2'222'222; ++i) {
+
+139 
+test
+.
+	`incr
+();
+
+140 
+std
+::
+cout
+ << '\r' << 
+test
+.
+	`to_string
+() << std::
+flush
+;
+
+142 
+std
+::
+cout
+ << std::
+endl
+;
+
+143 
+	}
+}
+
+	@Step-05x/main.cpp
+
+37 #include 
+	~<climits
+>
+
+39 class 
+	cI_Incrementable
+
+
+41 
+	mpublic
+:
+
+42 
+virtual
+ ~
+I_Incrementable
+() = default;
+
+43 
+virtual
+ void 
+incr
+() = 0;
+
+46 class 
+	cBasicCounter
+ : 
+public
+ 
+I_Incrementable
+
+
+48 
+public
+:
+
+49 unsigned 
+	$get_value
+() const { return 
+value_
+; }
+
+50 void 
+	$incr
+() 
+override
+ { ++
+value_
+; 
+	}
+}
+
+52 
+	gprotected
+:
+
+53 unsigned 
+value_
+ = 0;
+
+56 
+	gtemplate
+<unsigned 
+	glimit_
+>
+
+57 class 
+	cLimitCounter
+ : 
+public
+ 
+BasicCounter
+
+
+59 
+public
+:
+
+60 
+LimitCounter
+() = default;
+
+61 static 
+constexpr
+ unsigned 
+	$get_limit
+() { return 
+limit_
+; }
+
+62 void 
+	$incr
+() 
+override
+;
+
+64 
+private
+:
+
+65 
+virtual
+ void 
+	$overflowed
+() { 
+	}
+}
+
+68 
+	gtemplate
+<unsigned 
+	glimit_
+>
+
+69 void 
+	gLimitCounter
+<
+	glimit_
+>::
+	$incr
+() {
+
+70 
+BasicCounter
+::
+	`incr
+();
+
+71 if (
+	`get_value
+() >= 
+limit_
+) {
+
+72 
+value_
+ = 0; 
+	`overflowed
+();
+
+74 
+	}
+}
+
+76 
+	gtemplate
+<unsigned 
+	glimit_
+>
+
+77 
+class
+ 
+	gOverflowCounter
+ : 
+public
+ 
+LimitCounter
+<
+limit_
+> {
+
+78 
+public
+:
+
+79 
+OverflowCounter
+(
+I_Incrementable
+ &
+next
+)
+
+80 : 
+LimitCounter
+<
+limit_
+>{}, 
+	gnext_
+{
+	gnext
+}
+
+83 
+	gprivate
+:
+
+84 void 
+overflowed
+() 
+override
+;
+
+85 
+	gI_Incrementable
+ &
+	gnext_
+;
+
+88 
+	gtemplate
+<unsigned 
+	glimit_
+>
+
+89 void 
+	gOverflowCounter
+<
+	glimit_
+>::
+	$overflowed
+() {
+
+90 
+next_
+.
+	`incr
+();
+
+91 
+	}
+}
+
+97 #include 
+	~<iomanip
+>
+
+98 #include 
+	~<iostream
+>
+
+99 #include 
+	~<sstream
+>
+
+100 #include 
+	~<string
+>
+
+102 class 
+	cOperationHoursMeter
+
+
+104 
+	mpublic
+:
+
+105 
+OperationHoursMeter
+();
+
+106 
+	mstd
+::
+string
+ 
+	$to_string
+() const;
+
+107 void 
+	`incr
+();
+
+109 
+private
+:
+
+110 
+BasicCounter
+ 
+days_
+;
+
+111 
+OverflowCounter
+<24> 
+hours_
+;
+
+112 
+OverflowCounter
+<60> 
+minutes_
+;
+
+113 
+OverflowCounter
+<60> 
+seconds_
+;
+
+114 
+OverflowCounter
+<10> 
+sec_10th_
+;
+
+117 
+OperationHoursMeter
+::
+	$OperationHoursMeter
+()
+
+118 : 
+days_
+{
+	}
+}
+
+119 , 
+	ghours_
+{
+	gdays_
+}
+
+120 , 
+	gminutes_
+{
+	ghours_
+}
+
+121 , 
+	gseconds_
+{
+	gminutes_
+}
+
+122 , 
+	gsec_10th_
+{
+	gseconds_
+}
+
+125 
+	gstd
+::
+string
+ 
+OperationHoursMeter
+::
+	$to_string
+() const {
+
+126 
+std
+::
+ostringstream
+ 
+os
+{};
+
+127 
+os
+.
+	`fill
+('0');
+
+128 
+os
+ << 
+days_
+.
+	`get_value
+()
+
+130 << 
+std
+::
+	`setw
+(2) << 
+hours_
+.
+	`get_value
+()
+
+132 << 
+std
+::
+	`setw
+(2) << 
+minutes_
+.
+	`get_value
+()
+
+134 << 
+std
+::
+	`setw
+(2) << 
+seconds_
+.
+	`get_value
+()
+
+136 << 
+std
+::
+	`setw
+(1) << 
+sec_10th_
+.
+	`get_value
+();
+
+137 return 
+os
+.
+	`str
+();
+
+138 
+	}
+}
+
+140 void 
+	gOperationHoursMeter
+::
+	$incr
+() {
+
+141 
+sec_10th_
+.
+	`incr
+();
+
+142 
+	}
+}
+
+144 #include 
+	~<iostream
+>
+
+146 int 
+	$main
+() {
+
+147 
+OperationHoursMeter
+ 
+test
+{};
+
+148 for (int 
+i
+ = 0; i < 2'222'222; ++i) {
+
+149 
+test
+.
+	`incr
+();
+
+150 
+std
+::
+cout
+ << '\r' << 
+test
+.
+	`to_string
+() << std::
+flush
+;
+
+152 
+std
+::
+cout
+ << std::
+endl
+;
+
+153 
+	}
+}
+
+	@Step-05y/main.cpp
+
+31 #include 
+	~<climits
+>
+
+33 class 
+	cI_Incrementable
+ {
+
+34 
+	mpublic
+:
+
+35 
+virtual
+ ~
+I_Incrementable
+() =default;
+
+36 
+virtual
+ void 
+incr
+() =0;
+
+39 class 
+	cBasicCounter
+ : 
+public
+ 
+I_Incrementable
+ {
+
+40 
+public
+:
+
+41 unsigned 
+	$get_value
+() const { return 
+value_
+; }
+
+42 void 
+	$incr
+() 
+override
+ { ++
+value_
+; 
+	}
+}
+
+43 
+	gprivate
+:
+
+44 unsigned 
+value_
+ = 0;
+
+47 
+	gtemplate
+<unsigned 
+	glimit_
+ = 
+UINT_MAX
+>
+
+48 class 
+	cLimitCounter
+ : 
+public
+ 
+I_Incrementable
+ {
+
+49 
+public
+:
+
+50 
+LimitCounter
+() =default;
+
+51 unsigned 
+	$get_value
+() const { return 
+value_
+; }
+
+52 unsigned 
+	$get_limit
+() const { return 
+limit_
+; 
+	}
+}
+
+53 void 
+	$incr
+() 
+override
+;
+
+54 
+private
+:
+
+55 unsigned 
+value_
+ = 0;
+
+56 
+	}
+};
+
+58 
+	gtemplate
+<unsigned 
+	glimit_
+>
+
+59 void 
+	gLimitCounter
+<
+	glimit_
+>::
+	$incr
+() {
+
+60 if (++
+value_
+ == 
+limit_
+) {
+
+61 
+value_
+ = 0;
+
+63 
+	}
+}
+
+65 
+	gtemplate
+<unsigned 
+	glimit_
+>
+
+66 class 
+	cOverflowCounter
+ : 
+public
+ 
+I_Incrementable
+ {
+
+67 
+public
+:
+
+68 
+	$OverflowCounter
+(
+I_Incrementable
+& 
+next
+)
+
+69 : 
+next_
+{
+next
+}
+
+70 {
+	}
+}
+
+71 unsigned 
+	$get_value
+() const { return 
+value_
+; 
+	}
+}
+
+72 static 
+constexpr
+ unsigned 
+	$get_limit
+() { return 
+limit_
+; 
+	}
+}
+
+73 void 
+	$incr
+() 
+override
+;
+
+74 
+private
+:
+
+75 unsigned 
+value_
+ = 0;
+
+76 
+I_Incrementable
+& 
+next_
+;
+
+77 
+	}
+};
+
+79 
+	gtemplate
+<unsigned 
+	glimit_
+>
+
+80 void 
+	gOverflowCounter
+<
+	glimit_
+>::
+	$incr
+() {
+
+81 if (++
+value_
+ == 
+limit_
+) {
+
+82 
+value_
+ = 0;
+
+83 
+next_
+.
+	`incr
+();
+
+85 
+	}
+}
+
+91 #include 
+	~<iomanip
+>
+
+92 #include 
+	~<iostream
+>
+
+93 #include 
+	~<sstream
+>
+
+94 #include 
+	~<string
+>
+
+96 class 
+	cOperationHoursMeter
+ {
+
+97 
+	mpublic
+:
+
+98 
+OperationHoursMeter
+();
+
+99 
+	mstd
+::
+string
+ 
+	$to_string
+() const;
+
+100 void 
+	`incr
+();
+
+101 
+private
+:
+
+102 
+BasicCounter
+ 
+days_
+;
+
+103 
+OverflowCounter
+<24> 
+hours_
+;
+
+104 
+OverflowCounter
+<60> 
+minutes_
+;
+
+105 
+OverflowCounter
+<60> 
+seconds_
+;
+
+106 
+OverflowCounter
+<10> 
+sec_10th_
+;
+
+109 
+OperationHoursMeter
+::
+	$OperationHoursMeter
+()
+
+110 : 
+days_
+{
+	}
+}
+
+111 , 
+	ghours_
+{
+	gdays_
+}
+
+112 , 
+	gminutes_
+{
+	ghours_
+}
+
+113 , 
+	gseconds_
+{
+	gminutes_
+}
+
+114 , 
+	gsec_10th_
+{
+	gseconds_
+}
+
+117 
+	gstd
+::
+string
+ 
+OperationHoursMeter
+::
+	$to_string
+() const {
+
+118 
+std
+::
+ostringstream
+ 
+os
+{};
+
+119 
+os
+.
+	`fill
+('0');
+
+120 
+os
+ << 
+days_
+.
+	`get_value
+()
+
+122 << 
+std
+::
+	`setw
+(2) << 
+hours_
+.
+	`get_value
+()
+
+124 << 
+std
+::
+	`setw
+(2) << 
+minutes_
+.
+	`get_value
+()
+
+126 << 
+std
+::
+	`setw
+(2) << 
+seconds_
+.
+	`get_value
+()
+
+128 << 
+std
+::
+	`setw
+(1) << 
+sec_10th_
+.
+	`get_value
+();
+
+129 return 
+os
+.
+	`str
+();
+
+130 
+	}
+}
+
+132 void 
+	gOperationHoursMeter
+::
+	$incr
+() {
+
+133 
+sec_10th_
+.
+	`incr
+();
+
+134 
+	}
+}
+
+136 #include 
+	~<iostream
+>
+
+138 int 
+	$main
+() {
+
+139 
+OperationHoursMeter
+ 
+test
+{};
+
+140 for (int 
+i
+ = 0; i < 2'222'222; ++i) {
+
+141 
+test
+.
+	`incr
+();
+
+142 
+std
+::
+cout
+ << '\r' << 
+test
+.
+	`to_string
+() << std::
+flush
+;
+
+144 
+std
+::
+cout
+ << std::
+endl
+;
+
+145 
+	}
+}
+
+	@Step-06/main.cpp
+
+35 #include 
+	~<climits
+>
+
+36 #include 
+	~<functional
+>
+
+38 class 
+	cBasicCounter
+ {
+
+39 
+	mpublic
+:
+
+40 unsigned 
+	$get_value
+() const { return 
+value_
+; }
+
+41 void 
+	$incr
+() { ++
+value_
+; 
+	}
+}
+
+42 void 
+	$reset
+() { 
+value_
+ = 0;
+	}
+}
+
+43 
+	gprivate
+:
+
+44 unsigned 
+value_
+ = 0;
+
+47 class 
+	cLimitCounter
+ : 
+public
+ 
+BasicCounter
+ {
+
+48 
+public
+:
+
+49 
+LimitCounter
+();
+
+50 
+	$LimitCounter
+(unsigned 
+limit
+)
+
+51 : 
+limit_
+{
+limit
+}
+
+52 {
+	}
+}
+
+53 unsigned 
+	$get_limit
+() const { return 
+limit_
+; 
+	}
+}
+
+54 void 
+incr
+();
+
+55 
+	gprivate
+:
+
+56 unsigned const 
+limit_
+ = 
+UINT_MAX
+;
+
+57 
+virtual
+ void 
+	$overflowed
+() { 
+	}
+}
+
+60 void 
+	gLimitCounter
+::
+	$incr
+() {
+
+61 
+BasicCounter
+::
+	`incr
+();
+
+62 if (
+	`get_value
+() == 
+limit_
+) {
+
+63 
+	`reset
+();
+
+64 
+	`overflowed
+();
+
+67 
+	}
+}
+
+69 class 
+	cOverflowCounter
+ : 
+public
+ 
+LimitCounter
+ {
+
+70 
+public
+:
+
+71 
+OverflowCounter
+(unsigned 
+limit
+, 
+std
+::
+function
+<void()> 
+next
+)
+
+72 : 
+LimitCounter
+{
+limit
+}, 
+	gnext_
+{
+	gnext
+}
+
+74 
+	gprivate
+:
+
+75 void 
+	$overflowed
+() 
+override
+;
+
+76 
+std
+::
+function
+<void()> 
+next_
+;
+
+77 
+	}
+};
+
+79 void 
+	gOverflowCounter
+::
+	$overflowed
+() {
+
+80 if (
+next_
+) 
+	`next_
+();
+
+81 
+	}
+}
+
+87 #include 
+	~<iomanip
+>
+
+88 #include 
+	~<iostream
+>
+
+89 #include 
+	~<sstream
+>
+
+90 #include 
+	~<string
+>
+
+92 class 
+	cOperationHoursMeter
+ {
+
+93 
+	mpublic
+:
+
+94 
+OperationHoursMeter
+();
+
+95 
+	mstd
+::
+string
+ 
+	$to_string
+() const;
+
+96 void 
+	`incr
+();
+
+97 
+private
+:
+
+98 
+BasicCounter
+ 
+days_
+;
+
+99 
+OverflowCounter
+ 
+hours_
+;
+
+100 
+OverflowCounter
+ 
+minutes_
+;
+
+101 
+OverflowCounter
+ 
+seconds_
+;
+
+102 
+OverflowCounter
+ 
+sec_10th_
+;
+
+105 
+OperationHoursMeter
+::
+	$OperationHoursMeter
+()
+
+106 : 
+days_
+{
+	}
+}
+
+107 , 
+	ghours_
+{24, [
+this
+]{ 
+	gdays_
+.
+incr
+(); }}
+
+108 , 
+	gminutes_
+{60, [
+this
+]{ 
+	ghours_
+.
+incr
+(); }}
+
+109 , 
+	gseconds_
+{60, [
+this
+]{ 
+	gminutes_
+.
+incr
+(); }}
+
+110 , 
+	gsec_10th_
+{10, [
+this
+]{ 
+	gseconds_
+.
+incr
+(); }}
+
+113 
+	gstd
+::
+string
+ 
+OperationHoursMeter
+::
+	$to_string
+() const {
+
+114 
+std
+::
+ostringstream
+ 
+os
+{};
+
+115 
+os
+.
+	`fill
+('0');
+
+116 
+os
+ << 
+days_
+.
+	`get_value
+()
+
+118 << 
+std
+::
+	`setw
+(2) << 
+hours_
+.
+	`get_value
+()
+
+120 << 
+std
+::
+	`setw
+(2) << 
+minutes_
+.
+	`get_value
+()
+
+122 << 
+std
+::
+	`setw
+(2) << 
+seconds_
+.
+	`get_value
+()
+
+124 << 
+std
+::
+	`setw
+(1) << 
+sec_10th_
+.
+	`get_value
+();
+
+125 return 
+os
+.
+	`str
+();
+
+126 
+	}
+}
+
+128 void 
+	gOperationHoursMeter
+::
+	$incr
+() {
+
+129 
+sec_10th_
+.
+	`incr
+();
+
+130 
+	}
+}
+
+132 #include 
+	~<iostream
+>
+
+134 int 
+	$main
+() {
+
+135 
+OperationHoursMeter
+ 
+test
+{};
+
+136 for (int 
+i
+ = 0; i < 2'222'222; ++i) {
+
+137 
+test
+.
+	`incr
+();
+
+138 
+std
+::
+cout
+ << '\r' << 
+test
+.
+	`to_string
+() << std::
+flush
+;
+
+140 
+std
+::
+cout
+ << std::
+endl
+;
+
+141 
+	}
+}
+
+	@Step-07/main.cpp
+
+37 #include 
+	~<climits
+>
+
+38 #include 
+	~<functional
+>
+
+40 class 
+	cBasicCounter
+ {
+
+41 
+	mpublic
+:
+
+42 unsigned 
+	$get_value
+() const { return 
+value_
+; }
+
+43 void 
+	$incr
+() { ++
+value_
+; 
+	}
+}
+
+44 void 
+	$reset
+() { 
+value_
+ = 0;
+	}
+}
+
+45 
+	gprivate
+:
+
+46 unsigned 
+value_
+ = 0;
+
+49 
+	gtemplate
+<unsigned 
+	glimit_
+ = 
+UINT_MAX
+>
+
+50 class 
+	cLimitCounter
+ : 
+public
+ 
+BasicCounter
+ {
+
+51 
+public
+:
+
+52 
+LimitCounter
+() =default;
+
+53 static 
+constexpr
+ unsigned 
+	$get_limit
+() { return 
+limit_
+; }
+
+54 void 
+	`incr
+();
+
+55 
+private
+:
+
+56 
+virtual
+ void 
+	$overflowed
+() { 
+	}
+}
+
+59 
+	gtemplate
+<unsigned 
+	glimit_
+>
+
+60 void 
+	gLimitCounter
+<
+	glimit_
+>::
+	$incr
+() {
+
+61 
+BasicCounter
+::
+	`incr
+();
+
+62 if (
+	`get_value
+() == 
+limit_
+) {
+
+63 
+	`reset
+();
+
+64 
+	`overflowed
+();
+
+67 
+	}
+}
+
+69 
+	gtemplate
+<unsigned 
+	glimit_
+>
+
+70 
+class
+ 
+	gOverflowCounter
+ : 
+public
+ 
+LimitCounter
+<
+limit_
+> {
+
+71 
+public
+:
+
+72 
+OverflowCounter
+(
+std
+::
+function
+<void()> 
+next
+)
+
+73 : 
+next_
+{
+next
+}
+
+75 
+private
+:
+
+76 void 
+overflowed
+() 
+override
+;
+
+77 
+	gstd
+::
+function
+<void()> 
+next_
+;
+
+80 
+	gtemplate
+<unsigned 
+	glimit_
+>
+
+81 void 
+	gOverflowCounter
+<
+	glimit_
+>::
+	$overflowed
+() {
+
+82 if (
+next_
+) 
+	`next_
+();
+
+83 
+	}
+}
+
+89 #include 
+	~<iomanip
+>
+
+90 #include 
+	~<iostream
+>
+
+91 #include 
+	~<sstream
+>
+
+92 #include 
+	~<string
+>
+
+94 class 
+	cOperationHoursMeter
+ {
+
+95 
+	mpublic
+:
+
+96 
+OperationHoursMeter
+();
+
+97 
+	mstd
+::
+string
+ 
+	$to_string
+() const;
+
+98 void 
+	`incr
+();
+
+99 
+private
+:
+
+100 
+BasicCounter
+ 
+days_
+;
+
+101 
+OverflowCounter
+<24> 
+hours_
+;
+
+102 
+OverflowCounter
+<60> 
+minutes_
+;
+
+103 
+OverflowCounter
+<60> 
+seconds_
+;
+
+104 
+OverflowCounter
+<10> 
+sec_10th_
+;
+
+107 
+OperationHoursMeter
+::
+	$OperationHoursMeter
+()
+
+108 : 
+days_
+{
+	}
+}
+
+109 , 
+	ghours_
+{[
+this
+]{ 
+	gdays_
+.
+incr
+(); }}
+
+110 , 
+	gminutes_
+{[
+this
+]{ 
+	ghours_
+.
+incr
+(); }}
+
+111 , 
+	gseconds_
+{[
+this
+]{ 
+	gminutes_
+.
+incr
+(); }}
+
+112 , 
+	gsec_10th_
+{[
+this
+]{ 
+	gseconds_
+.
+incr
+(); }}
+
+115 
+	gstd
+::
+string
+ 
+OperationHoursMeter
+::
+	$to_string
+() const {
+
+116 
+std
+::
+ostringstream
+ 
+os
+{};
+
+117 
+os
+.
+	`fill
+('0');
+
+118 
+os
+ << 
+days_
+.
+	`get_value
+()
+
+120 << 
+std
+::
+	`setw
+(2) << 
+hours_
+.
+	`get_value
+()
+
+122 << 
+std
+::
+	`setw
+(2) << 
+minutes_
+.
+	`get_value
+()
+
+124 << 
+std
+::
+	`setw
+(2) << 
+seconds_
+.
+	`get_value
+()
+
+126 << 
+std
+::
+	`setw
+(1) << 
+sec_10th_
+.
+	`get_value
+();
+
+127 return 
+os
+.
+	`str
+();
+
+128 
+	}
+}
+
+130 void 
+	gOperationHoursMeter
+::
+	$incr
+() {
+
+131 
+sec_10th_
+.
+	`incr
+();
+
+132 
+	}
+}
+
+134 #include 
+	~<iostream
+>
+
+136 int 
+	$main
+() {
+
+137 
+OperationHoursMeter
+ 
+test
+{};
+
+138 for (int 
+i
+ = 0; i < 2222222; ++i) {
+
+139 
+test
+.
+	`incr
+();
+
+140 
+std
+::
+cout
+ << '\r' << 
+test
+.
+	`to_string
+() << std::
+flush
+;
+
+142 
+std
+::
+cout
+ << std::
+endl
+;
+
+143 
+	}
+}
+
+	@Step-08/main.cpp
+
+40 #include 
+	~<climits
+>
+
+41 #include 
+	~<functional
+>
+
+43 
+	gtemplate
+<unsigned 
+	gN
+>
+
+44 class 
+	cFlexCounter
+ {
+
+45 
+	mpublic
+:
+
+46 static const unsigned 
+MAX
+ = 
+N
+;
+
+47 
+FlexCounter
+(
+std
+::
+function
+<
+bool
+()> 
+next
+)
+
+48 : 
+next_
+{
+next
+}
+
+50 unsigned 
+	$get_value
+() const { return 
+value_
+; 
+	}
+}
+
+51 
+bool
+ 
+incr
+();
+
+52 
+	gprivate
+:
+
+53 unsigned 
+value_
+ = 0;
+
+54 
+	gstd
+::
+function
+<
+bool
+()> 
+next_
+;
+
+57 
+	gtemplate
+<unsigned 
+	gN
+>
+
+58 
+bool
+ 
+	gFlexCounter
+<
+	gN
+>::
+	$incr
+() {
+
+59 auto const 
+old
+ = 
+value_
+;
+
+60 if (++
+value_
+ < 
+MAX
+)
+
+61 return 
+true
+;
+
+62 if (
+next_
+ && 
+	`next_
+()) {
+
+63 
+value_
+ = 0;
+
+64 return 
+true
+;
+
+66 
+value_
+ = 
+old
+;
+
+67 return 
+false
+;
+
+68 
+	}
+}
+
+73 #include 
+	~<iostream
+>
+
+75 void 
+	$test_counter_chain
+(int 
+n
+) {
+
+76 
+FlexCounter
+<3> 
+upper
+{[]{ return 
+true
+; }};
+
+77 
+FlexCounter
+<8> 
+lower
+{[&
+upper
+]{ return upper.
+	`incr
+(); }};
+
+78 for (int 
+i
+ = 0; i < 
+n
+; ++i) {
+
+79 
+std
+::
+cout
+ << 
+upper
+.
+	`get_value
+() << '/'
+
+80 << 
+lower
+.
+	`get_value
+() << ' '
+
+81 << 
+std
+::
+flush
+;
+
+82 
+lower
+.
+	`incr
+();
+
+84 
+std
+::
+cout
+ << std::
+endl
+;
+
+85 
+	}
+}
+
+87 void 
+	$test_sticky_counter
+(int 
+n
+) {
+
+88 
+FlexCounter
+<3> 
+sticky
+{[]{ return 
+false
+; }};
+
+89 for (int 
+i
+ = 0; i < 
+n
+; ++i) {
+
+90 
+std
+::
+cout
+ << 
+sticky
+.
+	`get_value
+() << ' ' << std::
+flush
+;
+
+91 
+sticky
+.
+	`incr
+();
+
+93 
+std
+::
+cout
+ << std::
+endl
+;
+
+94 
+	}
+}
+
+96 void 
+	$test_throwing_counter
+(int 
+n
+) {
+
+97 
+FlexCounter
+<3> 
+throwing
+{[]()-> 
+bool
+ { 
+throw
+ 42; }};
+
+98 for (int 
+i
+ = 0; i < 
+n
+; ++i) {
+
+99 
+try
+ {
+
+100 
+throwing
+.
+	`incr
+();
+
+101 
+std
+::
+cout
+ << 
+throwing
+.
+	`get_value
+()
+
+102 << ' ' << 
+std
+::
+flush
+;
+
+104 
+	`catch
+(int 
+ex
+) {
+
+105 
+std
+::
+cout
+ << "--- exception caught: "
+
+106 << 
+ex
+ << 
+std
+::
+endl
+;
+
+109 
+	}
+}
+
+111 int 
+	$main
+() {
+
+112 
+	`test_counter_chain
+(19);
+
+113 
+	`test_sticky_counter
+(6);
+
+114 
+	`test_throwing_counter
+(4);
+
+115 
+	}
+}
+
+	@Step-09/main.cpp
+
+40 #include 
+	~<climits
+>
+
+41 #include 
+	~<functional
+>
+
+42 #include 
+	~<limits
+>
+
+44 
+	gtemplate
+<
+typename
+ 
+	gT
+, 
+T
+ 
+	gN
+>
+
+45 class 
+	cFlexCounter
+ {
+
+46 
+	mpublic
+:
+
+47 
+using
+ 
+value_type
+ = 
+T
+;
+
+48 static const 
+value_type
+ 
+	mMAX
+ = 
+N
+;
+
+49 
+FlexCounter
+(
+std
+::
+function
+<
+bool
+()> 
+next
+)
+
+50 : 
+next_
+{
+next
+}
+
+52 
+value_type
+ 
+	$get_value
+() const { return 
+value_
+; 
+	}
+}
+
+53 
+bool
+ 
+incr
+();
+
+54 
+	gprivate
+:
+
+55 
+value_type
+ 
+value_
+ = value_type{};
+
+56 
+	gstd
+::
+function
+<
+bool
+()> 
+next_
+;
+
+59 
+	gtemplate
+<
+typename
+ 
+	gT
+, 
+T
+ 
+	gN
+>
+
+60 
+bool
+ 
+	gFlexCounter
+<
+	gT
+, 
+	gN
+>::
+	$incr
+() {
+
+61 if (++
+value_
+ < 
+MAX
+)
+
+62 return 
+true
+;
+
+63 if (
+next_
+ && 
+	`next_
+()) {
+
+64 
+value_
+ = 
+value_type
+{};
+
+65 return 
+true
+;
+
+67 return 
+false
+;
+
+68 
+	}
+}
+
+73 #include 
+	~<iostream
+>
+
+75 void 
+	$test_counter_chain
+(int 
+n
+) {
+
+76 
+FlexCounter
+<int, 3> 
+upper
+{[]{ return 
+true
+; }};
+
+77 
+FlexCounter
+<int, 8> 
+lower
+{[&
+upper
+]{ return upper.
+	`incr
+(); }};
+
+78 for (int 
+i
+ = 0; i < 
+n
+; ++i) {
+
+79 auto const 
+lower_is_at_limit
+ =
+
+80 (
+lower
+.
+	`get_value
+()+1 == lower.
+MAX
+);
+
+81 auto const 
+space_or_nl
+ = (
+not
+ 
+lower_is_at_limit
+) ? ' ' : '\n';
+
+82 
+std
+::
+cout
+ << 
+upper
+.
+	`get_value
+() << '/'
+
+83 << 
+lower
+.
+	`get_value
+() << 
+space_or_nl
+
+
+84 << 
+std
+::
+flush
+;
+
+85 
+lower
+.
+	`incr
+();
+
+87 
+std
+::
+cout
+ << std::
+endl
+;
+
+88 
+	}
+}
+
+90 void 
+	$test_sticky_counter
+(int 
+n
+) {
+
+91 
+FlexCounter
+<int, 3> 
+sticky
+{[]{ return 
+false
+; }};
+
+92 for (int 
+i
+ = 0; i < 
+n
+; ++i) {
+
+93 
+std
+::
+cout
+ << 
+sticky
+.
+	`get_value
+() << ' ' << std::
+flush
+;
+
+94 
+sticky
+.
+	`incr
+();
+
+96 
+std
+::
+cout
+ << std::
+endl
+;
+
+97 
+	}
+}
+
+99 void 
+	$test_throwing_counter
+(int 
+n
+) {
+
+100 
+FlexCounter
+<int, 3> 
+throwing
+{[]()-> 
+bool
+ { 
+throw
+ 42; }};
+
+101 for (int 
+i
+ = 0; i < 
+n
+; ++i) {
+
+102 
+try
+ {
+
+103 
+throwing
+.
+	`incr
+();
+
+104 
+std
+::
+cout
+ << 
+throwing
+.
+	`get_value
+()
+
+105 << ' ' << 
+std
+::
+flush
+;
+
+107 
+	`catch
+(int 
+ex
+) {
+
+108 
+std
+::
+cout
+ << "--- exception caught: "
+
+109 << 
+ex
+ << 
+std
+::
+endl
+;
+
+112 
+	}
+}
+
+114 int 
+	$main
+() {
+
+115 
+	`test_counter_chain
+(19);
+
+116 
+	`test_sticky_counter
+(5);
+
+117 
+	`test_throwing_counter
+(4);
+
+118 
+	}
+}
+
+	@
+1
+.
+0
+14
+242
+Step-00/main.cpp
+Step-01/main.cpp
+Step-02/main.cpp
+Step-03/main.cpp
+Step-04/main.cpp
+Step-04x/main.cpp
+Step-04y/main.cpp
+Step-05/main.cpp
+Step-05x/main.cpp
+Step-05y/main.cpp
+Step-06/main.cpp
+Step-07/main.cpp
+Step-08/main.cpp
+Step-09/main.cpp

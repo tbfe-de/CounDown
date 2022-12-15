@@ -79,7 +79,7 @@ bool FlexCounter<N>::incr() {
 void test_counter_chain(int n) {
     std::cout << __func__ << std::endl;
     FlexCounter<3> upper{[]{ return true; }};
-    FlexCounter<8> lower{[&upper]{ return upper.incr(); }};
+    FlexCounter<7> lower{[&upper]{ return upper.incr(); }};
     for (int i = 0; i < n; ++i) {
         auto const lower_is_at_limit =
             (lower.get_value()+1 == lower.MAX);
@@ -110,7 +110,7 @@ void test_throwing_counter(int n) {
                       << ' ' << std::flush;
         }
         catch(int ex) {
-            std::cout << "--- exception caught: "
+            std::cout << "---exception caught: "
                       << ex << std::endl;
         }
     }
@@ -130,7 +130,7 @@ private:
 };
 
 int main() {
-    test_counter_chain(19);
+    test_counter_chain(25);
     test_sticky_counter(6);
     test_throwing_counter(4);
 }
